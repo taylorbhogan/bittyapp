@@ -12,11 +12,15 @@ button{
   border: none;
 }
 button:hover{
-  background-color: #CCCCCC;
+  background-color: #BBBBBB;
   border-radius: .1rem;
 }
 
 /*      NAVIGATION     */
+
+.nav-link-list a {
+  color: inherit;
+}
 
 .nav-link-list {
   display: flex;
@@ -31,7 +35,7 @@ button:hover{
 }
 .nav-link {
   text-decoration: none;
-  color: black;
+  /* color: black; */
 }
 
 
@@ -49,16 +53,22 @@ main {
   width: 50vw;
   height: 50vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 #app-name{
-  color: aqua;
+  color: #13e7dd;
 }
 
 .carousel-button{
-  /* padding: 1rem; */
+  padding: 0 .5rem;
   height: 50vh;
+  color: inherit;
+
+}
+
+.coming-soon{
+  font-size: 12px;
 }
