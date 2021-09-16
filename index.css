@@ -1,10 +1,24 @@
+/*      APP-WIDE     */
+
 body {
   font-size: 24px;
   font-weight: 500;
   font-family:Arial, Helvetica, sans-serif;
 }
 
-ul {
+button{
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+button:hover{
+  background-color: #CCCCCC;
+  border-radius: .1rem;
+}
+
+/*      NAVIGATION     */
+
+.nav-link-list {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -12,6 +26,39 @@ ul {
   margin-top: 10vh;
 }
 
-li {
+.nav-link-list > li {
   list-style-type: none;
+}
+.nav-link {
+  text-decoration: none;
+  color: black;
+}
+
+
+/*      MAIN CONTENT     */
+
+.container{
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#app-name{
+  color: aqua;
+}
+
+.carousel-button{
+  /* padding: 1rem; */
+  height: 50vh;
 }

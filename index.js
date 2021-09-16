@@ -1,26 +1,39 @@
-window.addEventListener('DOMContentLoaded', (e) => {
+const apps = [
+  'app',
+  'blog',
+  'shop',
+  'note',
+  'game',
+  'grave'
+]
 
-  const pages = [
-    ['tiny app'],
-    ['tiny blog'],
-    ['tiny shop'],
-    ['tiny note'],
-    ['tiny game'],
-    ['tiny grave']
-  ]
+let appName = document.getElementById('app-name')
+appName.innerHTML = apps[0]
 
+const toggleDark = () => {
+  document.body.style.backgroundColor = '#000000'
+  document.body.style.color = '#FFFFFF'
+  appName.style.color = '#F6F6F6'
+}
+const toggleLight = () => {
+  document.body.style.backgroundColor = '#FFFFFF'
+  document.body.style.color = '#FFFFFF'
+  appName.style.color = '#000000'
+}
 
-  const currentPageNumber = 0
-  const currentPage = pages[currentPageNumber]
+const rotateRight = () => {
+  apps.push(apps.shift())
+  appName.innerHTML = apps[0]
+  apps[0] === 'grave' ? toggleDark() : toggleLight();
+  return apps;
+}
 
-  const leftButton = document.querySelector('#left')
-  const rightButton = document.querySelector('#right')
+const rotateLeft = () => {
+  apps.unshift(apps.pop())
+  appName.innerHTML = apps[0]
+  apps[0] === 'grave' ? toggleDark() : toggleLight();
+  return apps;
+}
 
-
-  leftButton.addEventListener('click', (e) => {
-    currentPageNumber--
-  })
-  rightButton.addEventListener('click', (e) => {
-    currentPageNumber++
-  })
-})
+document.getElementById('right-button').onclick = rotateRight;
+document.getElementById('left-button').onclick = rotateLeft;

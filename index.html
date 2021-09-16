@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./index.css">
-  <script src="./index.js" defer></script>
-  <title>Document</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+  <title>tinyapp</title>
 </head>
+
 <body>
   <nav>
-    <ul>
-      <li>app</li>
-      <li>blog</li>
-      <li>shop</li>
-      <li>note</li>
-      <li>game</li>
+    <ul class='nav-link-list'>
+      <li>
+        <a href="" class='nav-link'>app</a>
+      </li>
+      <li>
+        <a href="" class='nav-link'>blog</a>
+      </li>
+      <li>
+        <a href="" class='nav-link'>shop</a>
+      </li>
+      <li>
+        <a href="" class='nav-link'>note</a>
+      </li>
+      <li>
+        <a href="" class='nav-link'>game</a>
+      </li>
     </ul>
   </nav>
-  <main>
-    <button id='left'>L</button>
-    <div></div>
-    <button id='right'>R</button>
-  </main>
+  <div class="container">
+    <aside>
+      <button id='left-button' class='carousel-button'><</button>
+    </aside>
+    <main>
+      <span>tiny </span><span id='app-name'></span>
+    </main>
+    <aside>
+      <button id='right-button' class='carousel-button'>></button>
+    </aside>
+  </div>
 </body>
+
 </html>
