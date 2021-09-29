@@ -4,6 +4,7 @@ const apps = [
   'shop',
   'note',
   'game',
+  'art',
   'grave'
 ]
 
