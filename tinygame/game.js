@@ -17,6 +17,8 @@ segments = 5;
 
 // game logic
 const game = () => {
+  const scoreCard = document.querySelector('#score')
+  scoreCard.textContent = (segments - 5) * 10
   px += xv;
   py += yv;
 
@@ -27,43 +29,43 @@ const game = () => {
   // ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 
-  if (px < 0 ){
-    px = ts -1
+  if (px < 0) {
+    px = ts - 1
   }
-  if (px > ts -1){
+  if (px > ts - 1) {
     px = 0
   }
-  if (py < 0 ) {
-    py = ts -1
+  if (py < 0) {
+    py = ts - 1
   }
-  if (py > ts -1) {
+  if (py > ts - 1) {
     py = 0
   }
 
-  for (let i = 0 ; i < body.length; i++ ) {
+  for (let i = 0; i < body.length; i++) {
     // body[i] is one segment
     // gs is a trailing segment
     // here we take position of each ind. segment and fill a rect based on that equation. do the same thing with y value times whatever the gs value is, then we just subtract 2 from each to get the other corner
     // fill in the body we go, if the head is equal to any of the body positions, we reset the game
-    ctx.fillRect(body[i].x * gs, body[i].y * gs, gs -2, gs -2)
-    if(body[i].x === px && body[i].y === py){
+    ctx.fillRect(body[i].x * gs, body[i].y * gs, gs - 2, gs - 2)
+    if (body[i].x === px && body[i].y === py) {
       segments = 5
     }
   }
 
   // gets the initial object
-  body.push({x: px, y: py});
+  body.push({ x: px, y: py });
 
   // we don't want our segments to be different from our body
   // we need to remove any segments off of our body.
   // if we've eaten 10 apples and we're at 15, and we reset our segments back to 5, we need to shift off all our segments so we go back to what we had
 
-  while(body.length > segments) {
+  while (body.length > segments) {
     body.shift()
   }
 
-// if on our canvas, the apple and head of snake have overlapped,
-  if (ax === px && ay === py){
+  // if on our canvas, the apple and head of snake have overlapped,
+  if (ax === px && ay === py) {
     // add on to our body
     segments++;
     // generate a brand new apple somewhere else within the bounds of the game
@@ -74,7 +76,7 @@ const game = () => {
 
 
   ctx.fillStyle = '#FF0000'
-  ctx.fillRect(ax * gs, ay * gs, gs -2, gs -2)
+  ctx.fillRect(ax * gs, ay * gs, gs - 2, gs - 2)
 
 
 
@@ -86,30 +88,36 @@ const game = () => {
 // Control our D-pad
 const keyDown = e => {
   console.log(e.keyCode);
-  switch(e.keyCode){
-    case(83):
-    // console.log('left');
-    xv = -1
-    yv = 0
-    break
-    case(69):
-    // console.log('up');
-    xv = 0
-    yv = -1
+  switch (e.keyCode) {
 
-    break
-    case(70):
-    // console.log('right');
-    xv = 1
-    yv = 0
+    // LEFT
+    case (83):
+    case (37):
+      xv = -1
+      yv = 0
+      break
 
-    break
-    case(68):
-    // console.log('down');
-    xv = 0
-    yv = 1
+    // UP
+    case (69):
+    case (38):
+      xv = 0
+      yv = -1
+      break
 
-    break
+    // RIGHT
+    case (70):
+    case (39):
+      xv = 1
+      yv = 0
+
+      // DOWN
+      break
+    case (68):
+    case (40):
+      xv = 0
+      yv = 1
+
+      break
   }
 }
 
@@ -119,7 +127,7 @@ const init = () => {
   ctx = canvas.getContext('2d')
   document.addEventListener('keydown', keyDown)
   // game fires on this interval
-  setInterval(game, 1000/15)
+  setInterval(game, 1000 / 15)
 
   // alert('This Works')
 }
