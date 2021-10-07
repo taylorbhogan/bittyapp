@@ -1,93 +1,137 @@
-// initial state for our game
-// head to start, but then also used to reference each individual segment
-// to StaticRange, our x and y values are set to the coordinates
-px = py = 10;
-// "boundaries" - the number of pixels in each square
-gs = ts = 20;
-// apple
-ax = ay = 15;
+/*
+Individual contributions:
+ - Scoreboard
+ - Selectable game difficulty
+ - Arcade variable game difficulty
+ */
 
-// these are the only values manipulated by our keys (directional values)
+/////////////////////////////////////////////////////////////////////////
+// defaulting to normal, use inputted difficulty value to determine gameplay cadence, then start game
+let speedInterval;
+let arcadeMultiplier = 0;
+const gameSpeed = document.querySelector('#gameSpeed')
+const setGameSpeed = () => {
+  clearInterval(speedInterval)
+  if (gameSpeed.textContent === 'Easy') speedInterval = setInterval(game, 1000 / 8);
+  if (gameSpeed.textContent === 'Normal') speedInterval = setInterval(game, 1000 / 15);
+  if (gameSpeed.textContent === 'Hard') speedInterval = setInterval(game, 1000 / 30);
+  if (gameSpeed.textContent === 'Arcade') {
+    speedInterval = setInterval(game, 1000 / (15 + arcadeMultiplier))
+    document.querySelector('#arcadeLevel').textContent = arcadeMultiplier
+
+  };
+
+}
+
+//
+const init = () => {
+  canvas = document.getElementById('game');
+  ctx = canvas.getContext('2d');
+  document.addEventListener('keydown', keyDown);
+
+  setGameSpeed()
+}
+
+
+// window.onload = init()
+// alternatively
+document.addEventListener('DOMContentLoaded', init)
+
+/////////////////////////////////////////////////////////////////////////
+const setDifficulty = (e) => {
+  if (e.target.id === 'easyButton') gameSpeed.textContent = 'Easy'
+  if (e.target.id === 'normalButton') gameSpeed.textContent = 'Normal'
+  if (e.target.id === 'hardButton') gameSpeed.textContent = 'Hard'
+  if (e.target.id === 'arcadeButton') {
+    gameSpeed.textContent = 'Arcade'
+    const arcadeLevelIntro = document.createElement('h2')
+    arcadeLevelIntro.textContent = 'Arcade Level: '
+    document.querySelector('#scoreH2').append(arcadeLevelIntro)
+    const arcadeLevel = document.createElement('span')
+    arcadeLevel.textContent = '0'
+    arcadeLevel.setAttribute('id', 'arcadeLevel')
+    arcadeLevelIntro.append(arcadeLevel)
+  }
+  setGameSpeed()
+}
+
+const buttons = document.querySelectorAll('.difficultyButton')
+buttons.forEach(button => button.addEventListener('click', (e) => setDifficulty(e)))
+
+/////////////////////////////////////////////////////////////////////////
+// initial state of game layout; 0,0 is top left
+px = py = 10;  // head positionX, Y - later used to ref. ea. segment
+// "boundaries" - sets playable area size via # pixels per square
+gridScale = 20;
+tableSize = 20;
+aplX = aplY = 15;  // apple position
+// arcadeCount = 0;   // used for arcade game speed (DNW)
+
+// the only game values manipulated by our keys (directional indicators)
 xv = yv = 0;
 
-// we're using OOP, so every segment of the snake will be its own object
-// snake starts with just a head, no body. body will appear depending on initial keydown
-body = [];     //{x: px, y:py}
+// OOP; every segment of the snake will be an object
+// on load snake has just a head, no body. body appears on keydown
+body = [];     // body will contain segments of form: { x: px, y: py }
 segments = 5;
 
+/////////////////////////////////////////////////////////////////////////
 // game logic
 const game = () => {
   const scoreCard = document.querySelector('#score')
   scoreCard.textContent = (segments - 5) * 10
+
   px += xv;
   py += yv;
 
-  ctx.fillStyle = '#333333'
+  ctx.fillStyle = '#333333'  // gameboard color
   ctx.fillRect(0, 0, canvas.width, canvas.height)
-  ctx.fillStyle = '#666666'
-  ctx.fillStyle = '#2ED9EB'
-  // ctx.fillRect(0, 0, canvas.width, canvas.height)
+  ctx.fillStyle = '#2ED9EB'  // snake color
 
+  // portal the snake when it goes off screen
+  if (px < 0) px = tableSize - 1;
+  if (px > tableSize - 1) px = 0;
+  if (py < 0) py = tableSize - 1;
+  if (py > tableSize - 1) py = 0;
 
-  if (px < 0) {
-    px = ts - 1
-  }
-  if (px > ts - 1) {
-    px = 0
-  }
-  if (py < 0) {
-    py = ts - 1
-  }
-  if (py > ts - 1) {
-    py = 0
-  }
-
+  // render the snake one body[i] (containing x & y values) segment at a time
   for (let i = 0; i < body.length; i++) {
-    // body[i] is one segment
-    // gs is a trailing segment
-    // here we take position of each ind. segment and fill a rect based on that equation. do the same thing with y value times whatever the gs value is, then we just subtract 2 from each to get the other corner
-    // fill in the body we go, if the head is equal to any of the body positions, we reset the game
-    ctx.fillRect(body[i].x * gs, body[i].y * gs, gs - 2, gs - 2)
+    ctx.fillRect(body[i].x * gridScale, body[i].y * gridScale, gridScale - 2, gridScale - 2)
+
+    // if the head hits the body, you lose! & we reset the game
     if (body[i].x === px && body[i].y === py) {
       segments = 5
     }
   }
 
-  // gets the initial object
-  body.push({ x: px, y: py });
+  body.push({ x: px, y: py });  // on load, sets the snake's head
 
-  // we don't want our segments to be different from our body
-  // we need to remove any segments off of our body.
-  // if we've eaten 10 apples and we're at 15, and we reset our segments back to 5, we need to shift off all our segments so we go back to what we had
-
+  // if we reset the game (segments = 5), shift off body segments to reflect that
   while (body.length > segments) {
     body.shift()
   }
 
-  // if on our canvas, the apple and head of snake have overlapped,
-  if (ax === px && ay === py) {
-    // add on to our body
+  // if apple & snake head overlap
+  if (aplX === px && aplY === py) {
+    // add on to body
     segments++;
-    // generate a brand new apple somewhere else within the bounds of the game
-    ax = Math.floor(Math.random() * ts)
-    ay = Math.floor(Math.random() * ts)
+    arcadeMultiplier++
+    setGameSpeed()
 
+    // arcadeCount += 10 (DNW)
+
+    // generate new apple elsewhere within the bounds of the game
+    aplX = Math.floor(Math.random() * tableSize)
+    aplY = Math.floor(Math.random() * tableSize)
   }
 
-
-  ctx.fillStyle = '#FF0000'
-  ctx.fillRect(ax * gs, ay * gs, gs - 2, gs - 2)
-
-
-
+  ctx.fillStyle = '#FF0000'  // apple color
+  ctx.fillRect(aplX * gridScale, aplY * gridScale, gridScale - 2, gridScale - 2)
 }
 
-
-
-
-// Control our D-pad
+/////////////////////////////////////////////////////////////////////////
+// D-pad Controls
 const keyDown = e => {
-  console.log(e.keyCode);
   switch (e.keyCode) {
 
     // LEFT
@@ -121,18 +165,21 @@ const keyDown = e => {
   }
 }
 
+// /////////////////////////////////////////////////////////////////////////
+// const init = () => {
+//   canvas = document.getElementById('game');
+//   ctx = canvas.getContext('2d');
+//   document.addEventListener('keydown', keyDown);
 
-const init = () => {
-  canvas = document.getElementById('game')
-  ctx = canvas.getContext('2d')
-  document.addEventListener('keydown', keyDown)
-  // game fires on this interval
-  setInterval(game, 1000 / 15)
+//   const gameSpeed = document.querySelector('#gameSpeed')
 
-  // alert('This Works')
-}
+//   if (gameSpeed.textContent === 'Easy') setInterval(game, 1000 / 10);
+//   if (gameSpeed.textContent === 'Normal') setInterval(game, 1000 / 15);
+//   if (gameSpeed.textContent === 'Hard') setInterval(game, 1000 / 20);
+//   // if (gameSpeed.textContent === 'Arcade') setInterval(game, 1000 / (15 + arcadeCount)); (DNW)
+// }
 
 
-// window.onload = init()
-
-document.addEventListener('DOMContentLoaded', init)
+// // window.onload = init()
+// // alternatively
+// document.addEventListener('DOMContentLoaded', init)

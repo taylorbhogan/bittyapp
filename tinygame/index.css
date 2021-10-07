@@ -12,3 +12,7 @@ canvas{
   border: 5px solid;;
   border-color: #2ED9EB;
 }
+
+#scoreH2{
+  text-align: center;
+}
