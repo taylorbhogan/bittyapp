@@ -9,16 +9,23 @@ Individual contributions:
 // defaulting to normal, use inputted difficulty value to determine gameplay cadence, then start game
 let speedInterval;
 let arcadeMultiplier = 0;
-const gameSpeed = document.querySelector('#gameSpeed')
+
 const setGameSpeed = () => {
+  let speedButton = document.querySelector('.activeButton')
   clearInterval(speedInterval)
-  if (gameSpeed.textContent === 'Easy') speedInterval = setInterval(game, 1000 / 8);
-  if (gameSpeed.textContent === 'Normal') speedInterval = setInterval(game, 1000 / 15);
-  if (gameSpeed.textContent === 'Hard') speedInterval = setInterval(game, 1000 / 30);
-  if (gameSpeed.textContent === 'Arcade') {
+
+  if (speedButton.id === 'easyButton') {
+    speedInterval = setInterval(game, 1000 / 8);
+  }
+  if (speedButton.id === 'normalButton') {
+    speedInterval = setInterval(game, 1000 / 15);
+  }
+  if (speedButton.id === 'hardButton') {
+    speedInterval = setInterval(game, 1000 / 30);
+  }
+  if (speedButton.id === 'arcadeButton') {
     speedInterval = setInterval(game, 1000 / (15 + arcadeMultiplier))
     document.querySelector('#arcadeLevel').textContent = arcadeMultiplier
-
   };
 
 }
@@ -39,18 +46,32 @@ document.addEventListener('DOMContentLoaded', init)
 
 /////////////////////////////////////////////////////////////////////////
 const setDifficulty = (e) => {
-  if (e.target.id === 'easyButton') gameSpeed.textContent = 'Easy'
-  if (e.target.id === 'normalButton') gameSpeed.textContent = 'Normal'
-  if (e.target.id === 'hardButton') gameSpeed.textContent = 'Hard'
+  // reset the active button
+  const butts = document.querySelectorAll('.difficultyButton')
+  butts.forEach(button => button.classList.remove('activeButton'))
+
+  // add the active class to the pushed button
+  if (e.target.id === 'easyButton') {
+    document.querySelector('#welcome').textContent = 'Tiny Game'
+    document.querySelector('#easyButton').classList.add('activeButton')
+  }
+  if (e.target.id === 'normalButton') {
+    document.querySelector('#welcome').textContent = 'Tiny Game'
+    document.querySelector('#normalButton').classList.add('activeButton')
+  }
+  if (e.target.id === 'hardButton') {
+    document.querySelector('#hardButton').classList.add('activeButton')
+    document.querySelector('#welcome').textContent = 'Tiny Game'
+  }
   if (e.target.id === 'arcadeButton') {
-    gameSpeed.textContent = 'Arcade'
-    const arcadeLevelIntro = document.createElement('h2')
-    arcadeLevelIntro.textContent = 'Arcade Level: '
-    document.querySelector('#scoreH2').append(arcadeLevelIntro)
+    document.querySelector('#arcadeButton').classList.add('activeButton')
+
+    const welcome = document.querySelector('#welcome')
+    welcome.textContent = 'Tiny Game: Level '
     const arcadeLevel = document.createElement('span')
     arcadeLevel.textContent = '0'
     arcadeLevel.setAttribute('id', 'arcadeLevel')
-    arcadeLevelIntro.append(arcadeLevel)
+    welcome.append(arcadeLevel)
   }
   setGameSpeed()
 }
@@ -101,6 +122,11 @@ const game = () => {
     // if the head hits the body, you lose! & we reset the game
     if (body[i].x === px && body[i].y === py) {
       segments = 5
+      arcadeMultiplier = 0
+      if (document.querySelector('#arcadeButton').classList.contains('activeButton')){
+        document.querySelector('#arcadeLevel').textContent = 0
+
+      }
     }
   }
 
@@ -116,6 +142,7 @@ const game = () => {
     // add on to body
     segments++;
     arcadeMultiplier++
+    document.querySelector('#arcadeLevel').textContent = arcadeMultiplier
     setGameSpeed()
 
     // arcadeCount += 10 (DNW)

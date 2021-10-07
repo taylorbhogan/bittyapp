@@ -11,17 +11,22 @@
 </head>
 
 <body>
-  <h1>Tiny Game</h1>
+  <h1 id='welcome'>Tiny Game</h1>
   <h2 id='scoreH2'>Your Score: <span id='score'>0</span></h2>
   <!-- <h2>Arcade Level: <span id='arcadeLevel'>0</span></h2> -->
-  <canvas id='game' width="400" height="400"></canvas>
-  <h2>Game Speed: <span id='gameSpeed'>Normal</span></h2>
-  <section>
-    <button class='difficultyButton' id='easyButton'>Easy</button>
-    <button class='difficultyButton' id='normalButton'>Normal</button>
-    <button class='difficultyButton' id='hardButton'>Hard</button>
-    <button class='difficultyButton' id='arcadeButton'>Arcade</button>
-  </section>
+  <main>
+    <canvas id='game' width="400" height="400"></canvas>
+    <aside id='settings'>
+      <h2>Speed: </h2>
+      <!-- <h2 id='gameSpeed'>Normal</h2> -->
+      <ul id='buttonList'>
+        <li><button class='difficultyButton' id='easyButton'>Easy</button></li>
+        <li><button class='difficultyButton activeButton' id='normalButton'>Normal</button></li>
+        <li><button class='difficultyButton' id='hardButton'>Hard</button></li>
+        <li><button class='difficultyButton' id='arcadeButton'>Arcade</button></li>
+      </ul>
+    </aside>
+  </main>
 </body>
 
 </html>

@@ -13,6 +13,37 @@ canvas{
   border-color: #2ED9EB;
 }
 
+main{
+  display: flex;
+}
+
+#settings{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 2rem;
+  width: 150px;
+  height: 400px;
+  background-color: beige;
+}
+
+#buttonList{
+  list-style-type: none;
+  padding: 0;
+}
+
+#buttonList button {
+  width: 100%;
+  padding: 1rem;
+  margin: 0;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.activeButton{
+  background-color: #2ED9EB;
+}
+
 #scoreH2{
   text-align: center;
 }
