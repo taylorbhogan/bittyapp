@@ -36,7 +36,6 @@ const init = () => {
   canvas = document.getElementById('game');
   ctx = canvas.getContext('2d');
   document.addEventListener('keydown', keyDown);
-
   setGameSpeed()
 }
 
@@ -68,7 +67,7 @@ const setDifficulty = (e) => {
     document.querySelector('#arcadeButton').classList.add('activeButton')
 
     const welcome = document.querySelector('#welcome')
-    welcome.textContent = 'Tiny Game: Level '
+    welcome.textContent = 'Tiny Arcade: Level '
     const arcadeLevel = document.createElement('span')
     arcadeLevel.textContent = '0'
     arcadeLevel.setAttribute('id', 'arcadeLevel')
@@ -104,7 +103,7 @@ const game = () => {
   scoreCard.textContent = (segments - 5) * 10
 
   const highScore = document.querySelector('#highScore')
-  if (+scoreCard.textContent > +highScore.textContent){
+  if (+scoreCard.textContent > +highScore.textContent) {
     highScore.textContent = scoreCard.textContent;
   }
 
@@ -129,7 +128,14 @@ const game = () => {
     if (body[i].x === px && body[i].y === py) {
       segments = 5
       arcadeMultiplier = 0
-      if (document.querySelector('#arcadeButton').classList.contains('activeButton')){
+      if (px !== 10 && py !== 10){
+        document.querySelector('#info').textContent = 'Ahh! You lose!'
+        document.querySelector('#info').removeAttribute('hidden')
+        setTimeout(() => {
+          document.querySelector('#info').setAttribute('hidden', 'true')
+        }, 1500)
+      }
+      if (document.querySelector('#arcadeButton').classList.contains('activeButton')) {
         document.querySelector('#arcadeLevel').textContent = 0
 
       }
@@ -166,11 +172,13 @@ const game = () => {
 /////////////////////////////////////////////////////////////////////////
 // D-pad Controls
 const keyDown = e => {
+
   switch (e.keyCode) {
 
     // LEFT
     case (83):
     case (37):
+      document.querySelector('#info').setAttribute('hidden', 'true')
       xv = -1
       yv = 0
       break
@@ -178,6 +186,7 @@ const keyDown = e => {
     // UP
     case (69):
     case (38):
+      document.querySelector('#info').setAttribute('hidden', 'true')
       xv = 0
       yv = -1
       break
@@ -185,6 +194,7 @@ const keyDown = e => {
     // RIGHT
     case (70):
     case (39):
+      document.querySelector('#info').setAttribute('hidden', 'true')
       xv = 1
       yv = 0
 
@@ -192,6 +202,7 @@ const keyDown = e => {
       break
     case (68):
     case (40):
+      document.querySelector('#info').setAttribute('hidden', 'true')
       xv = 0
       yv = 1
 
