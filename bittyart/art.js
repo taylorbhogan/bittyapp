@@ -1,6 +1,14 @@
-let makeArt = () => {
-  const tinyart = document.getElementById('tinyart')
-  const context = tinyart.getContext('2d')  // working in a 2d environment
+const makeArt = () => {
+  // const bittyart = document.getElementById('bittyart')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'art'
+  canvas.height = '500'
+  canvas.width = '500'
+
+  canvas.style.background = '#000000'
+  canvas.style.border = '4px solid #13e7dd'
+
+  const context = canvas.getContext('2d')  // working in a 2d environment
 
 
   // smooth gradiant
@@ -18,6 +26,8 @@ let makeArt = () => {
         context.fillStyle = `rgb(1, ${x}, ${y})`
       }
     }
+    const display = document.querySelector('#display')
+    display.append(canvas)
   }
 
 
@@ -74,4 +84,4 @@ let makeArt = () => {
   // }
 
 }
-document.addEventListener('DOMContentLoaded', makeArt)
+// document.addEventListener('DOMContentLoaded', makeArt)

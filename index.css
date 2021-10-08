@@ -71,3 +71,18 @@ main {
 .coming-soon{
   font-size: 12px;
 }
+
+
+.settings{
+  display: flex;
+  justify-content: space-between;
+}
+
+.activeButton{
+  color: #2ED9EB;
+}
+
+.difficultyButton:hover{
+  background: none;
+}
+
