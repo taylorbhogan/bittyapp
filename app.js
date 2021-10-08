@@ -1,4 +1,4 @@
-const generateNotes = () => {
+const generateApp = () => {
   const display = document.getElementById('display')
   const p = document.createElement('p')
   p.textContent = 'coming soon'

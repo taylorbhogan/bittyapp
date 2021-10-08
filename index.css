@@ -58,9 +58,9 @@ main {
   align-items: center;
 }
 
-#app-name{
+/* #app-name{
   color: #13e7dd;
-}
+} */
 
 .carousel-button{
   padding: 0 .5rem;
@@ -85,4 +85,3 @@ main {
 .difficultyButton:hover{
   background: none;
 }
-

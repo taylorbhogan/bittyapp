@@ -1,4 +1,4 @@
-const generateNotes = () => {
+const generateBlog = () => {
   const display = document.getElementById('display')
   const p = document.createElement('p')
   p.textContent = 'coming soon'
