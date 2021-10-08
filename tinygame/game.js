@@ -1,6 +1,7 @@
 /*
 Individual contributions:
  - Scoreboard
+ - High score
  - Selectable game difficulty
  - Arcade variable game difficulty
  */
@@ -102,6 +103,11 @@ const game = () => {
   const scoreCard = document.querySelector('#score')
   scoreCard.textContent = (segments - 5) * 10
 
+  const highScore = document.querySelector('#highScore')
+  if (+scoreCard.textContent > +highScore.textContent){
+    highScore.textContent = scoreCard.textContent;
+  }
+
   px += xv;
   py += yv;
 
@@ -142,10 +148,11 @@ const game = () => {
     // add on to body
     segments++;
     arcadeMultiplier++
-    document.querySelector('#arcadeLevel').textContent = arcadeMultiplier
-    setGameSpeed()
+    if (document.querySelector('#arcadeLevel') !== null) {
+      document.querySelector('#arcadeLevel').textContent = arcadeMultiplier
 
-    // arcadeCount += 10 (DNW)
+    }
+    setGameSpeed()
 
     // generate new apple elsewhere within the bounds of the game
     aplX = Math.floor(Math.random() * tableSize)
@@ -191,22 +198,3 @@ const keyDown = e => {
       break
   }
 }
-
-// /////////////////////////////////////////////////////////////////////////
-// const init = () => {
-//   canvas = document.getElementById('game');
-//   ctx = canvas.getContext('2d');
-//   document.addEventListener('keydown', keyDown);
-
-//   const gameSpeed = document.querySelector('#gameSpeed')
-
-//   if (gameSpeed.textContent === 'Easy') setInterval(game, 1000 / 10);
-//   if (gameSpeed.textContent === 'Normal') setInterval(game, 1000 / 15);
-//   if (gameSpeed.textContent === 'Hard') setInterval(game, 1000 / 20);
-//   // if (gameSpeed.textContent === 'Arcade') setInterval(game, 1000 / (15 + arcadeCount)); (DNW)
-// }
-
-
-// // window.onload = init()
-// // alternatively
-// document.addEventListener('DOMContentLoaded', init)
