@@ -6,7 +6,8 @@ const makeArt = () => {
   canvas.width = '500'
 
   canvas.style.background = '#000000'
-  canvas.style.border = '4px solid #13e7dd'
+  // canvas.style.border = '4px solid #13e7dd'
+  canvas.style.border = `4px solid ${apps[0].color}`
 
   const context = canvas.getContext('2d')  // working in a 2d environment
 
@@ -26,9 +27,9 @@ const makeArt = () => {
         context.fillStyle = `rgb(1, ${x}, ${y})`
       }
     }
-    const display = document.querySelector('#display')
-    display.append(canvas)
   }
+  const display = document.querySelector('#display')
+  display.append(canvas)
 
 
   // neat squared overlay

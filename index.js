@@ -2,30 +2,37 @@ const apps = [
   {
     'name': 'app',
     'color': '#13e7dd',
+    'font': 'Audiowide',
   },
   {
     'name': 'blog',
-    'color': 'blue',
+    'color': '#009BFF',
+    'font': 'Share Tech Mono',
   },
   {
     'name': 'shop',
-    'color': 'blue',
+    'color': '#bd6bdd',
+    'font': 'Monoton',
   },
   {
     'name': 'note',
     'color': 'blue',
+    'font': 'Permanent Marker',
   },
   {
     'name': 'game',
-    'color': 'blue',
+    'color': '#13e7dd',
+    'font': 'Orbitron',
   },
   {
     'name': 'art',
-    'color': 'blue',
+    'color': '#FF66FF',
+    'font': 'Megrim',
   },
   {
     'name': 'grave',
     'color': '#e013e7',
+    'font': 'Creepster',
   },
 ]
 
@@ -41,6 +48,7 @@ const setDisplay = () => {
   document.body.style.backgroundColor = '#FFFFFF';
   appTitle.innerHTML = selectedApp.name;
   appTitle.style.color = selectedApp.color;
+  appTitle.style.fontFamily = selectedApp.font;
 
   switch (selectedApp.name) {
     case ('app'):
@@ -81,6 +89,51 @@ const rotateLeft = () => {
   return apps;
 }
 
+const navigate = (e) => {
+  while (apps[0].name !== e.target.id){
+    rotateRight()
+  }
+}
+
+const links = document.querySelectorAll('.nav-link')
+links.forEach(link => link.addEventListener('click', navigate))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.getElementById('right-button').onclick = rotateRight;
 document.getElementById('left-button').onclick = rotateLeft;
+
+const keyDown = (e) => {
+  switch(e.keyCode){
+    case(37):
+      return rotateLeft();
+    case(39):
+      return rotateRight();
+    default:
+      break;
+
+  }
+}
+
+document.addEventListener('keydown', keyDown)
+
 document.addEventListener('DOMContentLoaded', setDisplay)

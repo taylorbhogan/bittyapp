@@ -12,7 +12,8 @@ button{
   border: none;
 }
 button:hover{
-  background-color: #BBBBBB;
+  /* background-color: #BBBBBB; */
+  background-color: #dd736b;
   border-radius: .1rem;
 }
 
@@ -40,6 +41,11 @@ button:hover{
 
 
 /*      MAIN CONTENT     */
+
+.main-text{
+  font-size: 4rem;
+  margin: 0;
+}
 
 .container{
   margin-top: 10vh;

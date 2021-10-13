@@ -28,7 +28,8 @@ const generateGame = () => {
   canvas.id = 'game'
   canvas.height = '400'
   canvas.width = '400'
-  canvas.style.border = '4px solid #13e7dd'
+  // canvas.style.border = '4px solid #13e7dd'
+  canvas.style.border = `4px solid ${apps[0].color}`
 
   const settings = document.createElement('div')
   settings.classList.add('settings')
@@ -48,7 +49,10 @@ const generateGame = () => {
   arcadeButton.id = 'arcadeButton'
 
   const difficultyButtons = [easyButton, normalButton, hardButton, arcadeButton]
-  difficultyButtons.forEach(button => button.classList.add('difficultyButton'))
+  difficultyButtons.forEach(button => {
+    button.classList.add('difficultyButton')
+    button.style.fontFamily = apps[0].font
+    })
 
   display.append(canvas, settings)
   settings.append(easyButton, normalButton, hardButton, arcadeButton)
@@ -118,7 +122,7 @@ const generateGame = () => {
 
     ctx.fillStyle = '#333333'  // gameboard color
     ctx.fillRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = '#2ED9EB'  // snake color
+    ctx.fillStyle = `${apps[0].color}`  // snake color
 
     // portal the snake when it goes off screen
     if (px < 0) px = tableSize - 1;
