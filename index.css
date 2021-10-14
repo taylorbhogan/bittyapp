@@ -10,8 +10,10 @@ button{
   cursor: pointer;
   background: none;
   border: none;
+  margin: 1px;
 }
 button:hover{
+  margin: 0;
   /* background-color: #BBBBBB; */
   /* background-color: #dd736b; */
   /* border-bottom-color: black;
@@ -75,7 +77,8 @@ main {
 
 .carousel-button{
   padding: 0 .5rem;
-  /* height: 50vh; */
+  height: 2rem;
+  width: 2rem;
   color: inherit;
 
 }
@@ -95,4 +98,21 @@ main {
 
 .difficultyButton:hover{
   background: none;
+}
+
+.noteInput{
+  line-height: 2rem;
+  border-radius: 3px;
+}
+
+.submitButton{
+
+}
+
+#notebook{
+  width: 400px;
+  height: 400px;
+  margin-bottom: 12px;
+  overflow: scroll;
+  padding: 1rem;
 }

@@ -16,7 +16,7 @@ const apps = [
   },
   {
     'name': 'note',
-    'color': 'blue',
+    'color': 'orange',
     'font': 'Permanent Marker',
   },
   {
