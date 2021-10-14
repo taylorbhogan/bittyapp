@@ -13,8 +13,13 @@ button{
 }
 button:hover{
   /* background-color: #BBBBBB; */
-  background-color: #dd736b;
-  border-radius: .1rem;
+  /* background-color: #dd736b; */
+  /* border-bottom-color: black;
+  border-bottom-style: solid;
+  border-left-width: 1px; */
+  box-shadow: 1px 2px red;
+  border: 1px solid blue;
+  border-radius: .3rem;
 }
 
 /*      NAVIGATION     */
@@ -70,7 +75,7 @@ main {
 
 .carousel-button{
   padding: 0 .5rem;
-  height: 50vh;
+  /* height: 50vh; */
   color: inherit;
 
 }
