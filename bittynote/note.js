@@ -10,15 +10,67 @@ const generateNotes = () => {
   notebook.style.color = apps[0].color
 
 
+  const deleteNote = (noteId) => {
+    const savedNotes = JSON.parse(localStorage.getItem('notes'))
+
+    let deletedNote = null;
+    for (let i = 0; i < savedNotes.length; i++){
+      if (savedNotes[i].id === +noteId){
+        deletedNote = savedNotes.splice(i, 1)
+        break
+      }
+    }
+    if (deletedNote){
+      // console.log('deletedNote---->', deletedNote);
+      localStorage.setItem('notes', JSON.stringify(savedNotes))
+      renderNotes()
+    } else {
+      console.log('womp womp');
+    }
+
+  }
+
   const formatNote = note => {
     const formattedNote = document.createElement('div')
     formattedNote.id = note.id
     formattedNote.classList.add('note')
 
+    const noteContainer = document.createElement('div')
+
     const noteText = document.createElement('p')
+    noteText.classList.add('noteText')
     noteText.textContent = note.text
 
-    formattedNote.appendChild(noteText)
+    const timestamp = document.createElement('p')
+    timestamp.classList.add('timestamp')
+    const theDate = new Date(note.id).toLocaleDateString()
+    const theTime = new Date(note.id).toLocaleTimeString()
+
+    timestamp.textContent = `${theTime} on ${theDate}`
+
+    noteContainer.appendChild(noteText)
+    noteContainer.appendChild(timestamp)
+
+    const buttonContainer = document.createElement('div')
+
+    const deleteButton = document.createElement('button')
+    deleteButton.id = note.id
+    deleteButton.classList.add('deleteNoteButton')
+    deleteButton.textContent = 'X'
+    deleteButton.addEventListener('click', e => {
+      // e.stopPropagation()
+      deleteNote(e.target.id);
+    })
+
+
+    // const editButton = document.createElement('button')
+    // deleteButton.textContent = 'Edit'
+
+    // buttonContainer.appendChild(editButton)
+    buttonContainer.appendChild(deleteButton)
+
+    formattedNote.appendChild(noteContainer)
+    formattedNote.appendChild(buttonContainer)
     return formattedNote;
   }
 
@@ -46,19 +98,12 @@ const generateNotes = () => {
       text,
     }
 
-    const savedInStorage = localStorage.getItem('notes')
-    const savedNotes = JSON.parse(savedInStorage)
-    // console.log('savedNotes in addNote -->',savedNotes);
+    const savedNotes = JSON.parse(localStorage.getItem('notes'))
     savedNotes.push(note);
     localStorage.setItem('notes', JSON.stringify(savedNotes))
 
-    // const formattedNote = formatNote(note)
-
-    // notebook.append(formattedNote)
-
     renderNotes()
   }
-
 
 
 

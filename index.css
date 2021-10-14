@@ -105,8 +105,8 @@ main {
   border-radius: 3px;
 }
 
-.submitButton{
-
+.deleteNoteButton{
+  font-size: .5rem;
 }
 
 #notebook{
@@ -115,4 +115,20 @@ main {
   margin-bottom: 12px;
   overflow: scroll;
   padding: 1rem;
+}
+
+.noteText{
+  border-bottom: 1px solid brown;
+  width: 250px;
+}
+
+.note{
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.timestamp{
+  padding-top: .5rem;
+  font-size: .5rem;
 }

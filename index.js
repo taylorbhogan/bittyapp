@@ -16,7 +16,7 @@ const apps = [
   },
   {
     'name': 'note',
-    'color': 'orange',
+    'color': '#ece63d',
     'font': 'Permanent Marker',
   },
   {
@@ -41,9 +41,11 @@ const apps = [
 const setDisplay = () => {
   const selectedApp = apps[0]
   const display = document.getElementById('display')
+  const options = document.getElementById('markOptions')
   const appTitle = document.getElementById('app-name')
 
   display.innerHTML = ''
+  options.innerHTML = ''
   document.body.style.color = '#000000';
   document.body.style.backgroundColor = '#FFFFFF';
   appTitle.innerHTML = selectedApp.name;
