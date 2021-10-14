@@ -2,7 +2,7 @@ const apps = [
   {
     'name': 'app',
     'color': '#13e7dd',
-    'font': 'Audiowide',
+    'font': 'Press Start 2P',
   },
   {
     'name': 'blog',
@@ -41,7 +41,7 @@ const apps = [
 const setDisplay = () => {
   const selectedApp = apps[0]
   const display = document.getElementById('display')
-  const options = document.getElementById('markOptions')
+  const options = document.getElementById('options')
   const appTitle = document.getElementById('app-name')
 
   display.innerHTML = ''

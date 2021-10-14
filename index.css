@@ -1,3 +1,5 @@
+@import './bittynote/note.css';
+
 /*      APP-WIDE     */
 
 body {
@@ -49,13 +51,19 @@ button:hover{
 
 /*      MAIN CONTENT     */
 
+#bitty{
+  font-family: 'Press Start 2P';
+  font-size: 3rem;
+}
+
 .main-text{
   font-size: 4rem;
   margin: 0;
 }
 
 .container{
-  margin-top: 10vh;
+  /* margin-top: 10vh; */
+  height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -100,35 +108,8 @@ main {
   background: none;
 }
 
-.noteInput{
-  line-height: 2rem;
-  border-radius: 3px;
+#errors{
+  color: red;
 }
 
-.deleteNoteButton{
-  font-size: .5rem;
-}
 
-#notebook{
-  width: 400px;
-  height: 400px;
-  margin-bottom: 12px;
-  overflow: scroll;
-  padding: 1rem;
-}
-
-.noteText{
-  border-bottom: 1px solid brown;
-  width: 250px;
-}
-
-.note{
-  margin: 1rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.timestamp{
-  padding-top: .5rem;
-  font-size: .5rem;
-}

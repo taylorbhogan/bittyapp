@@ -3,11 +3,12 @@
 const generateNotes = () => {
 
   const display = document.getElementById('display')
+  const options = document.getElementById('options')
+  const errorDisplay = document.getElementById('errors')
 
   const notebook = document.createElement('div')
   notebook.id = 'notebook'
   notebook.style.border = `4px solid ${apps[0].color}`
-  notebook.style.color = apps[0].color
 
 
   const deleteNote = (noteId) => {
@@ -21,56 +22,57 @@ const generateNotes = () => {
       }
     }
     if (deletedNote){
-      // console.log('deletedNote---->', deletedNote);
       localStorage.setItem('notes', JSON.stringify(savedNotes))
       renderNotes()
     } else {
-      console.log('womp womp');
+      errorDisplay.textContent = 'An error occurred while deleting your note.'
     }
-
   }
 
   const formatNote = note => {
+    //////  Create Note Div  //////
     const formattedNote = document.createElement('div')
     formattedNote.id = note.id
     formattedNote.classList.add('note')
 
-    const noteContainer = document.createElement('div')
 
+    //////  Create Note Text  //////
     const noteText = document.createElement('p')
     noteText.classList.add('noteText')
     noteText.textContent = note.text
+
+
+    //////  Create Bottom Row  //////
+    const adminContainer = document.createElement('div')
+    adminContainer.classList.add('notesAdmin')
 
     const timestamp = document.createElement('p')
     timestamp.classList.add('timestamp')
     const theDate = new Date(note.id).toLocaleDateString()
     const theTime = new Date(note.id).toLocaleTimeString()
-
     timestamp.textContent = `${theTime} on ${theDate}`
+    adminContainer.appendChild(timestamp)
 
-    noteContainer.appendChild(noteText)
-    noteContainer.appendChild(timestamp)
-
-    const buttonContainer = document.createElement('div')
-
+    //////  Create Buttons  //////
+    const buttonDiv = document.createElement('div')
     const deleteButton = document.createElement('button')
     deleteButton.id = note.id
-    deleteButton.classList.add('deleteNoteButton')
-    deleteButton.textContent = 'X'
+    deleteButton.classList.add('noteButton')
+    deleteButton.textContent = 'erase'
     deleteButton.addEventListener('click', e => {
-      // e.stopPropagation()
       deleteNote(e.target.id);
     })
 
+    const editButton = document.createElement('button')
+    editButton.classList.add('noteButton')
+    editButton.textContent = 'edit'
 
-    // const editButton = document.createElement('button')
-    // deleteButton.textContent = 'Edit'
+    buttonDiv.appendChild(editButton)
+    buttonDiv.appendChild(deleteButton)
+    adminContainer.append(buttonDiv)
 
-    // buttonContainer.appendChild(editButton)
-    buttonContainer.appendChild(deleteButton)
-
-    formattedNote.appendChild(noteContainer)
-    formattedNote.appendChild(buttonContainer)
+    formattedNote.appendChild(noteText)
+    formattedNote.appendChild(adminContainer)
     return formattedNote;
   }
 
@@ -109,8 +111,9 @@ const generateNotes = () => {
 
   display.append(notebook)
 
-  const options = document.getElementById('markOptions')
+  //////  Create Form  //////
   const form = document.createElement('form')
+  form.id = 'noteForm';
 
   const input = document.createElement('input')
   input.type = 'text'
@@ -118,9 +121,9 @@ const generateNotes = () => {
   input.placeholder = 'Enter your note...'
 
   const button = document.createElement('button')
-  button.classList.add('submitButton')
+  button.id = 'noteSubmit'
   button.type = 'submit'
-  button.textContent = 'Submit'
+  button.textContent = 'Jot'
   button.style.fontFamily = apps[0].font
   button.style.color = apps[0].color
 
