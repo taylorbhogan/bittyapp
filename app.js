@@ -4,5 +4,5 @@ const generateApp = () => {
   p.textContent = 'welcome'
   p.classList.add('coming-soon')
   display.append(p)
-  console.log('hello world');
+  // console.log('hello world');
 }
