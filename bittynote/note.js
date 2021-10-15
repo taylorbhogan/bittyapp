@@ -1,5 +1,3 @@
-// const notesArray = [];
-
 const generateNotes = () => {
 
   const display = document.getElementById('display')
@@ -11,12 +9,13 @@ const generateNotes = () => {
   notebook.style.border = `4px solid ${apps[0].color}`
 
   const editNote = (noteId, newNoteText) => {
+    //////  Delete old note & add new note  //////
     deleteNote(noteId)
     addNote(newNoteText)
   }
 
   const setEditForm = (noteId) => {
-
+    //////  Find note to edit in DOM & replace w/ form  //////
     const formattedNotes = document.querySelectorAll('.note')
     let divToReplace = null;
     for (let i = 0; i < formattedNotes.length; i++) {
@@ -59,6 +58,7 @@ const generateNotes = () => {
   }
 
   const deleteNote = (noteId) => {
+    //////  delete from storage, then call renderNotes  //////
     const savedNotes = JSON.parse(localStorage.getItem('notes'))
 
     let deletedNote = null;
@@ -144,9 +144,8 @@ const generateNotes = () => {
       })
     }
   }
-
-  // add note to storage, then call renderNotes
   const addNote = text => {
+    //////  add note to storage, then call renderNotes  //////
     const note = {
       id: Date.now(),
       text,
@@ -158,10 +157,6 @@ const generateNotes = () => {
 
     renderNotes()
   }
-
-
-
-  display.append(notebook)
 
   //////  Create Form  //////
   const form = document.createElement('form')
@@ -191,16 +186,6 @@ const generateNotes = () => {
   form.append(input, button)
   options.append(form)
 
+  display.append(notebook)
   renderNotes()
 }
-
-
-
-// generateNotes()
-
-// TODO:
-// get border, put input and submit button into options div
-
-// localstorage
-// key: notes
-// value: array of notes
