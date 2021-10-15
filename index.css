@@ -1,36 +1,41 @@
 @import './bittynote/note.css';
 
-/*      APP-WIDE     */
-
 body {
   font-size: 24px;
   font-weight: 500;
   font-family:Arial, Helvetica, sans-serif;
 }
 
+/*      BUTTONS     */
+
 button{
-  cursor: pointer;
   background: none;
   border: none;
-  /* margin: 1px; */
   border: 1px solid white;
+  border-radius: .3rem;
 }
 button:hover{
-  /* margin: 0; */
-  /* background-color: #BBBBBB; */
-  /* background-color: #dd736b; */
-  /* border-bottom-color: black;
-  border-bottom-style: solid;
-  border-left-width: 1px; */
   box-shadow: 1px 2px red;
   border: 1px solid blue;
-  border-radius: .3rem;
-  transition: all 500ms;
+  transition: box-shadow 500ms;
+  transition: border 50ms;
+}
 
+.submitButton{
+  padding: 0 1rem;
+  margin: 0;
+  border: 0;
+  border: 1px solid white;
+  background: none;
+}
+
+.submitButton:hover{
+  border: 1px solid #dadada;
+  transition: all 500ms;
 }
 
 /*      NAVIGATION     */
-
+/*
 .nav-link-list a {
   color: inherit;
 }
@@ -48,8 +53,7 @@ button:hover{
 }
 .nav-link {
   text-decoration: none;
-  /* color: black; */
-}
+} */
 
 
 /*      MAIN CONTENT     */
@@ -65,7 +69,6 @@ button:hover{
 }
 
 .container{
-  /* margin-top: 10vh; */
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -82,10 +85,6 @@ main {
   align-items: center;
 }
 
-/* #app-name{
-  color: #13e7dd;
-} */
-
 .carousel-button{
   padding: 0 .5rem;
   height: 2rem;
@@ -97,26 +96,20 @@ main {
   font-size: 12px;
 }
 
-
-#options{
-  display: flex;
-  justify-content: space-between;
-  width: 500px;
-}
-
 .activeButton{
   color: #2ED9EB;
 }
 
-.difficultyButton:hover{
-  background: none;
+#display{
+  margin: 2rem;
 }
 
 #errors{
   color: red;
 }
 
-#display{
-  margin: 2rem;
-
+#options{
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
 }

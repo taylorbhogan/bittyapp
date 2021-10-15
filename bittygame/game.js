@@ -26,6 +26,7 @@ const generateGame = () => {
   arcadeButton.textContent = 'arcade'
   arcadeButton.id = 'arcadeButton'
 
+
   const difficultyButtons = [easyButton, normalButton, hardButton, arcadeButton]
   difficultyButtons.forEach(button => {
     button.classList.add('difficultyButton')

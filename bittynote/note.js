@@ -32,11 +32,14 @@ const generateNotes = () => {
       }
 
       const form = document.createElement('form')
-      form.id = 'editForm'
+      form.id = 'editNoteForm'
       const input = document.createElement('input')
+      input.classList.add('noteInput')
       input.type = 'text'
       input.value = oldNote;
       const submit = document.createElement('input')
+      submit.classList.add('submitButton')
+      submit.style.fontFamily = apps[0].font
       submit.type = 'submit'
       submit.innerText = 'save'
 
@@ -91,10 +94,9 @@ const generateNotes = () => {
 
     //////  Create Bottom Row  //////
     const adminContainer = document.createElement('div')
-    adminContainer.classList.add('notesAdmin')
+    adminContainer.classList.add('noteAdmin')
 
     const timestamp = document.createElement('p')
-    timestamp.classList.add('timestamp')
     const theDate = new Date(note.id).toLocaleDateString()
     const theTime = new Date(note.id).toLocaleTimeString()
     timestamp.textContent = `${theTime} on ${theDate}`
@@ -104,7 +106,6 @@ const generateNotes = () => {
     const buttonDiv = document.createElement('div')
     const deleteButton = document.createElement('button')
     deleteButton.id = note.id
-    deleteButton.classList.add('noteButton')
     deleteButton.textContent = 'erase'
     deleteButton.addEventListener('click', e => {
       deleteNote(e.target.id);
@@ -112,8 +113,6 @@ const generateNotes = () => {
 
     const editButton = document.createElement('button')
     editButton.id = note.id
-    editButton.classList.add('noteButton')
-    editButton.classList.add('editButton')
     editButton.textContent = 'edit'
     editButton.addEventListener('click', e => {
       setEditForm(e.target.id)
@@ -173,7 +172,7 @@ const generateNotes = () => {
   input.placeholder = 'Enter your note...'
 
   const button = document.createElement('button')
-  button.id = 'noteSubmit'
+  button.classList.add('submitButton')
   button.type = 'submit'
   button.textContent = 'Jot'
   button.style.fontFamily = apps[0].font
