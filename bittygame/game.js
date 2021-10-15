@@ -47,6 +47,7 @@ const generateGame = () => {
   body = [];             // on load snake has just a head, no body. body appears on keydown body will contain segments of form: { x: posX, y: posY }
   segments = 5;
 
+
   score = 0;
 
   savedScore = JSON.parse(localStorage.getItem('highScore'))
