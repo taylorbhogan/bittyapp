@@ -8,6 +8,19 @@ body {
   font-family:Arial, Helvetica, sans-serif;
 }
 
+.submitButton{
+  padding: 0 1rem;
+  margin: 0;
+  border: 0;
+  border: 1px solid white;
+  background: none;
+}
+
+.submitButton:hover{
+  border: 1px solid #dadada;
+  transition: all 500ms;
+}
+
 button{
   cursor: pointer;
   background: none;
