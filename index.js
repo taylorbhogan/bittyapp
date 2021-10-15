@@ -11,6 +11,8 @@ const setDisplay = () => {
   appTitle.innerHTML = selectedApp.name;
   appTitle.style.color = selectedApp.color;
   appTitle.style.fontFamily = selectedApp.font;
+  document.title = selectedApp.title;
+
 
   switch (selectedApp.name) {
     case ('app'):
