@@ -76,15 +76,19 @@ const generateGame = () => {
 
     switch (speedButton.id) {
       case ('easyButton'):
+        console.log('easy')
         speedInterval = setInterval(game, 1000 / 8);
         break
       case ('normalButton'):
+        console.log('normal')
         speedInterval = setInterval(game, 1000 / 15);
         break
       case ('hardButton'):
+        console.log('hard')
         speedInterval = setInterval(game, 1000 / 30);
         break
       case ('arcadeButton'):
+        console.log('arcade')
         speedInterval = setInterval(game, 1000 / (15 + score))
         break
     }
