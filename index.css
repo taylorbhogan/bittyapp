@@ -1,3 +1,5 @@
+@import './bittynote/note.css';
+
 /*      APP-WIDE     */
 
 body {
@@ -13,7 +15,7 @@ button{
   margin: 1px;
 }
 button:hover{
-  margin: 0;
+  /* margin: 0; */
   /* background-color: #BBBBBB; */
   /* background-color: #dd736b; */
   /* border-bottom-color: black;
@@ -49,13 +51,19 @@ button:hover{
 
 /*      MAIN CONTENT     */
 
+#bitty{
+  font-family: 'Press Start 2P';
+  font-size: 3rem;
+}
+
 .main-text{
   font-size: 4rem;
   margin: 0;
 }
 
 .container{
-  margin-top: 10vh;
+  /* margin-top: 10vh; */
+  height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -100,19 +108,6 @@ main {
   background: none;
 }
 
-.noteInput{
-  line-height: 2rem;
-  border-radius: 3px;
-}
-
-.submitButton{
-
-}
-
-#notebook{
-  width: 400px;
-  height: 400px;
-  margin-bottom: 12px;
-  overflow: scroll;
-  padding: 1rem;
+#errors{
+  color: red;
 }

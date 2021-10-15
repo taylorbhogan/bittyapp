@@ -1,0 +1,78 @@
+.note{
+  margin: 1rem;
+  border: 1px solid #dadada;
+  border-radius: .2rem;
+  padding: 1rem;
+}
+
+
+#notebook{
+  width: 500px;
+  height: 500px;
+  margin: 2rem;
+  overflow: scroll;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.noteText{
+  font-size: 1rem;
+  padding-bottom: 1rem;
+  /* font-family: 'Pacifico', Helvetica, sans-serif; */
+  font-family: 'Kalam';
+}
+
+.notesAdmin{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.timestamp{
+  padding-top: .5rem;
+  font-size: .5rem;
+}
+
+.noteButton{
+  font-size: .5rem;
+}
+
+.editButton{
+  margin-right: .5rem;
+}
+
+.noteInput{
+  height: 2.5rem;
+  padding: 0 .5rem;
+  font-size: 1rem;
+  width: 70%;
+  line-height: 1rem;
+  border-radius: 3px;
+  border-color: #aaaaaa;
+  font-family: 'Kalam';
+}
+
+#noteForm{
+  width: 500px;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+#noteSubmit{
+  padding: 0 1rem;
+
+}
+
+#noteSubmit:hover{
+  border: 1px solid #dadada;
+
+}
+
+#editForm{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
