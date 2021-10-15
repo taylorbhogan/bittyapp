@@ -18,7 +18,8 @@
 .noteText{
   font-size: 1rem;
   padding-bottom: 1rem;
-  font-family: 'Pacifico', Helvetica, sans-serif;
+  /* font-family: 'Pacifico', Helvetica, sans-serif; */
+  font-family: 'Kalam';
 }
 
 .notesAdmin{
@@ -36,6 +37,10 @@
   font-size: .5rem;
 }
 
+.editButton{
+  margin-right: .5rem;
+}
+
 .noteInput{
   height: 2.5rem;
   padding: 0 .5rem;
@@ -43,6 +48,8 @@
   width: 70%;
   line-height: 1rem;
   border-radius: 3px;
+  border-color: #aaaaaa;
+  font-family: 'Kalam';
 }
 
 #noteForm{
@@ -62,4 +69,10 @@
 #noteSubmit:hover{
   border: 1px solid #dadada;
 
+}
+
+#editForm{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

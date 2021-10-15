@@ -15,7 +15,7 @@ button{
   margin: 1px;
 }
 button:hover{
-  margin: 0;
+  /* margin: 0; */
   /* background-color: #BBBBBB; */
   /* background-color: #dd736b; */
   /* border-bottom-color: black;
@@ -111,5 +111,3 @@ main {
 #errors{
   color: red;
 }
-
-
