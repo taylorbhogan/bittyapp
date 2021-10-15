@@ -191,11 +191,11 @@ const generateGame = () => {
 
     ctx.font = '20px Typewriter'
     ctx.fillStyle = 'white'
-    ctx.fillText(`Score: ${score}`, 280, 20)
-    ctx.fillText(`High Score: ${highScore}`, 100, 20)
+    ctx.fillText(`Score: ${score}`, 10, 25)
+    ctx.fillText(`High Score: ${highScore}`, 360, 25)
 
     if (document.querySelector('.activeButton')){
-      if (document.querySelector('.activeButton').id === 'arcadeButton') ctx.fillText(`Level: ${score / 10}`, 100, 60)
+      if (document.querySelector('.activeButton').id === 'arcadeButton') ctx.fillText(`Level: ${score / 10}`, 200, 25)
     }
 
   }
