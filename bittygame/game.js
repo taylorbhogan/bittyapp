@@ -3,7 +3,7 @@ const generateGame = () => {
   // initial state of game layout; 0,0 is top left
   px = py = 10;  // head positionX, Y - later used to ref. ea. segment
   // "boundaries" - sets playable area size via # pixels per square
-  gridScale = 20;
+  gridScale = 25;
   tableSize = 20;
   aplX = aplY = 15;  // apple position
   // arcadeCount = 0;   // used for arcade game speed (DNW)
@@ -17,7 +17,8 @@ const generateGame = () => {
   segments = 5;
 
   score = 0;
-  highScore = 0;
+  localStorage.setItem('highScore', JSON.stringify(0))
+  highScore = JSON.parse(localStorage.getItem('highScore'))
 
   /////////////////////////////////////////////////////////////////////////
 
@@ -26,8 +27,8 @@ const generateGame = () => {
 
   const canvas = document.createElement('canvas')
   canvas.id = 'game'
-  canvas.height = '400'
-  canvas.width = '400'
+  canvas.height = '500'
+  canvas.width = '500'
   // canvas.style.border = '4px solid #13e7dd'
   canvas.style.border = `4px solid ${apps[0].color}`
 
@@ -165,7 +166,11 @@ const generateGame = () => {
       // add on to body
       segments++;
       score += 10;
-      if (score > highScore) highScore = score
+      // let highScore = JSON.parse(localStorage.getItem('highScore'))
+      if (score > highScore) {
+        highScore = score
+        localStorage.setItem('highScore', JSON.stringify(highScore))
+      }
       arcadeMultiplier++
       if (document.querySelector('#arcadeLevel') !== null) {
         document.querySelector('#arcadeLevel').textContent = arcadeMultiplier
