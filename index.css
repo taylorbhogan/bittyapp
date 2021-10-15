@@ -111,3 +111,8 @@ main {
 #errors{
   color: red;
 }
+
+#display{
+  margin: 2rem;
+
+}
