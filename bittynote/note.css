@@ -9,7 +9,6 @@
 #notebook{
   width: 500px;
   height: 500px;
-  margin: 2rem;
   overflow: scroll;
   padding: 1rem;
   box-sizing: border-box;
