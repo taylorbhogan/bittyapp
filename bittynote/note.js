@@ -151,8 +151,13 @@ const generateNotes = () => {
       text,
     }
 
-    const savedNotes = JSON.parse(localStorage.getItem('notes'))
-    savedNotes.push(note);
+    let savedNotes = JSON.parse(localStorage.getItem('notes'))
+    if (savedNotes){
+      savedNotes.push(note);
+    } else {
+      savedNotes = [];
+      savedNotes.push(note);
+    }
     localStorage.setItem('notes', JSON.stringify(savedNotes))
 
     renderNotes()
