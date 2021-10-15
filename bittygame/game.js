@@ -17,7 +17,10 @@ const generateGame = () => {
   segments = 5;
 
   score = 0;
-  localStorage.setItem('highScore', JSON.stringify(0))
+  highScore = JSON.parse(localStorage.getItem('highScore'))
+  if (!highScore){
+    localStorage.setItem('highScore', JSON.stringify(0))
+  }
   highScore = JSON.parse(localStorage.getItem('highScore'))
 
   /////////////////////////////////////////////////////////////////////////
