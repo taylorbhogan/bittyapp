@@ -12,7 +12,7 @@ const setDisplay = () => {
   appTitle.style.color = selectedApp.color;
   appTitle.style.fontFamily = selectedApp.font;
   document.title = selectedApp.title;
-
+  document.querySelector('link[rel="shortcut icon"]').href = selectedApp.favicon
 
   switch (selectedApp.name) {
     case ('app'):
