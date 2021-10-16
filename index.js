@@ -12,7 +12,7 @@ const setDisplay = () => {
   appTitle.style.color = selectedApp.color;
   appTitle.style.fontFamily = selectedApp.font;
   document.title = selectedApp.title;
-
+  document.querySelector('link[rel="shortcut icon"]').href = selectedApp.favicon
 
   switch (selectedApp.name) {
     case ('app'):
@@ -53,15 +53,14 @@ const rotateLeft = () => {
   return apps;
 }
 
-const navigate = (e) => {
-  while (apps[0].name !== e.target.id){
-    rotateRight()
-  }
-}
+// const navigate = (e) => {
+//   while (apps[0].name !== e.target.id){
+//     rotateRight()
+//   }
+// }
 
-const links = document.querySelectorAll('.nav-link')
-links.forEach(link => link.addEventListener('click', navigate))
-
+// const links = document.querySelectorAll('.nav-link')
+// links.forEach(link => link.addEventListener('click', navigate))
 
 document.getElementById('right-button').onclick = rotateRight;
 document.getElementById('left-button').onclick = rotateLeft;
@@ -74,7 +73,6 @@ const keyDown = (e) => {
       return rotateRight();
     default:
       break;
-
   }
 }
 
