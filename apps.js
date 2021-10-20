@@ -42,6 +42,13 @@ const apps = [
     font: 'Megrim',
   },
   {
+    name: 'math',
+    title: 'bitty math',
+    favicon: './images/app.svg',
+    color: '#FF66FF',
+    font: 'Megrim',
+  },
+  {
     name: 'grave',
     title: 'bitty grave',
     favicon: './images/grave.svg',
