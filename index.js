@@ -33,6 +33,9 @@ const setDisplay = () => {
     case ('note'):
       generateNotes();
       break
+    case ('math'):
+      generateMath();
+      break
     case ('grave'):
       generateGrave();
       break
