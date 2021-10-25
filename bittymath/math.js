@@ -16,6 +16,7 @@ const generateMath = () => {
   // we want to persist the defaultState and only work with a copy of it
   let state = { ...defaultState };
 
+  let decimal = false;
 
   // draw calculator
   const math = document.createElement('div')
@@ -39,7 +40,16 @@ const generateMath = () => {
 
   // handle number inputs
   const handleNumInput = numInput => {
-    if (numInput === '.') return;
+    if (numInput === '.' && decimal) return;
+
+    // TODO: implement decimal input
+    if (numInput === '.' && !decimal) return;
+
+    if (numInput === 'ENTER') {
+      if (state.currentInput.length > 0) return calculate();
+      return;
+    }
+
     if (numInput === 'c') {
       state = { ...defaultState }
       return lcd.innerHTML = 0
@@ -54,6 +64,11 @@ const generateMath = () => {
   // switch statement for operation
   const calculate = () => {
     let currentValue = parseFloat(state.currentInput)
+    console.log(state.currentInput);
+    console.log(parseFloat(state.currentInput));
+    console.log(typeof currentValue);
+    console.log(typeof state.total);
+    console.log(state.currentOp);
     switch (state.currentOp) {
       case ('add'):
         state.total += currentValue;
@@ -85,13 +100,23 @@ const generateMath = () => {
 
   // FIND THE BUG AND GET ADD AND SUBTRACT WORKING
   const handleOpInput = opInput => {
+    options.childNodes.forEach(op => {
+      if (op.innerHTML === opInput) {
+        op.style.color = apps[0].color
+      } else {
+        op.style.color = '#000000'
+      }
+    })
+
     if (state.currentOp) {
       calculate()
       state.currentOp = opInput
+      return
     } else {
       state.total = parseFloat(state.currentInput)
       state.currentInput = ''
       state.currentOp = opInput;
+      return
     }
     console.log(state);
   }
@@ -99,8 +124,10 @@ const generateMath = () => {
   // draw numbers buttons
   nums.forEach(num => {
     const button = document.createElement('button')
+    button.classList.add('bittyFont')
     button.innerHTML = num;
     if (num === 'c') button.style.color = apps[0].color
+    if (num === 'ENTER') button.style.fontFamily = apps[0].font
     button.onclick = () => handleNumInput(num)
     numbers.append(button)
 
@@ -119,4 +146,10 @@ const generateMath = () => {
   math.append(numbers)
   display.append(math)
 
+
+  const keyDown = e => {
+    console.log(e.keyCode);
+    console.log(e.key);
+  }
+  document.addEventListener('keydown', keyDown)
 }

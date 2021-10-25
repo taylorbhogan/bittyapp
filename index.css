@@ -2,10 +2,18 @@
 @import './bittymath/math.css';
 
 body {
+  text-align: center;
   font-size: 24px;
   font-weight: 500;
   font-family:Arial, Helvetica, sans-serif;
 }
+
+.bittyFont,
+#options > * {
+  font-family: 'Press Start 2P';
+}
+
+
 
 /*      BUTTONS     */
 

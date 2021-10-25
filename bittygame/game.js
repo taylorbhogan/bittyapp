@@ -30,7 +30,6 @@ const generateGame = () => {
   const difficultyButtons = [easyButton, normalButton, hardButton, arcadeButton]
   difficultyButtons.forEach(button => {
     button.classList.add('difficultyButton')
-    button.style.fontFamily = apps[0].font
   })
 
   options.append(easyButton, normalButton, hardButton, arcadeButton)
