@@ -1,6 +1,6 @@
 #math{
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -14,6 +14,7 @@
   overflow: scroll;
   border: 1px solid #eaeaea;
   border-radius: .25rem;
+  margin-bottom: 1rem;
 }
 
 #numbers{
@@ -23,7 +24,7 @@
 }
 
 #numbers button{
-width: 30%;
-height: 20%;
+width: 33%;
+height: 25%;
 padding: 1rem;
 }
