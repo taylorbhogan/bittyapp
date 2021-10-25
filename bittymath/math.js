@@ -124,6 +124,7 @@ const generateMath = () => {
   // draw numbers buttons
   nums.forEach(num => {
     const button = document.createElement('button')
+    button.classList.add('bittyFont')
     button.innerHTML = num;
     if (num === 'c') button.style.color = apps[0].color
     if (num === 'ENTER') button.style.fontFamily = apps[0].font
@@ -145,4 +146,10 @@ const generateMath = () => {
   math.append(numbers)
   display.append(math)
 
+
+  const keyDown = e => {
+    console.log(e.keyCode);
+    console.log(e.key);
+  }
+  document.addEventListener('keydown', keyDown)
 }
