@@ -1,8 +1,5 @@
 /*
 Features:
-- display
-  - each item has an image of the item, price, 'buy' button
-  - buy button => adds item to cart
 - in options
   - cart button innerHTML = Cart: $0.00
   - as you add to your cart, update innerHTML to reflect total value of the cart
@@ -20,33 +17,64 @@ Stack:
 - in production => DB (document based, NoSQL), backend - serves us the items (serverless), image storage (AWS S3)
 */
 
-const wares = [
-  {
+let wares = {
+  1: {
+    id: 1,
     name: 'one',
     price: 10
   },
-  {
+  2: {
+    id: 2,
     name: 'two',
     price: 20
   },
-  {
+  3: {
+    id: 3,
     name: 'three',
     price: 30
   }
-]
-const cart = [
+}
 
-]
+let cart = {
+  total: 0
+};
 
 const generateShop = () => {
-  let total = 0;
 
   const shop = document.createElement('div')
   shop.id = 'shop'
   shop.style.border = `4px solid ${apps[0].color}`;
   display.append(shop);
 
-  wares.forEach(ware => {
+  const savedwares = JSON.parse(localStorage.getItem('wares'))
+  if (savedwares) {
+    wares = savedwares
+  }
+
+  const savedCart = JSON.parse(localStorage.getItem('cart'))
+  if (savedCart) {
+    cart = savedCart
+  }
+
+
+  const buy = e => {
+    const wareId = e.target.id;
+
+    if (cart[wareId] === undefined) {
+      cart[wareId] = {
+        ...wares[wareId],
+        qty: 1
+      }
+    } else {
+      ++cart[wareId].qty;
+    }
+    cart.total += wares[wareId].price
+    localStorage.setItem('cart', JSON.stringify(cart))
+    cartButton.innerText = `$ ${cart.total}`
+  }
+
+
+  Object.values(wares).forEach(ware => {
     const shelf = document.createElement('div')
     shelf.classList.add('shelf')
 
@@ -63,8 +91,10 @@ const generateShop = () => {
     price.classList.add('bittyFont')
 
     const buyButton = document.createElement('button')
+    buyButton.id = ware.id
     buyButton.classList.add('buyButton')
     buyButton.innerText = 'add to cart'
+    buyButton.onclick = e => buy(e)
 
 
     shelf.append(image)
@@ -75,7 +105,8 @@ const generateShop = () => {
   })
 
   const cartButton = document.createElement('button');
-  cartButton.innerText = `$ ${total}`
+  cartButton.innerText = `$ ${cart.total}`
+  cartButton.onclick = () => flipCart()
   options.append(cartButton)
 
 }
