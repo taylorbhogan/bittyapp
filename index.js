@@ -33,7 +33,7 @@ const setDisplay = () => {
     case ('note'):
       generateNotes();
       break
-    case ('math'):
+    case ('MATH'):
       generateMath();
       break
     case ('grave'):
