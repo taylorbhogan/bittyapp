@@ -69,8 +69,17 @@ button:hover{
 
 /*      MAIN CONTENT     */
 
-.main-text{
+.app-header{
   font-size: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* width: 20%; */
+}
+
+#app-name{
+  margin-left: 1rem;
 }
 
 .container{
