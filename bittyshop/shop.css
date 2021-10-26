@@ -6,7 +6,7 @@
 
 .shelf{
   width: 33%;
-  height: 33%;
+  height: 40%;
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -25,4 +25,9 @@
 
 .price{
   font-size: .8rem;
+}
+
+.buyButton{
+  font-size: .8rem;
+  margin: .3rem;
 }

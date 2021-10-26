@@ -62,9 +62,15 @@ const generateShop = () => {
     price.classList.add('price')
     price.classList.add('bittyFont')
 
+    const buyButton = document.createElement('button')
+    buyButton.classList.add('buyButton')
+    buyButton.innerText = 'add to cart'
+
+
     shelf.append(image)
     shelf.append(name)
     shelf.append(price)
+    shelf.append(buyButton)
     shop.append(shelf)
   })
 
