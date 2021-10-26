@@ -1,5 +1,6 @@
 @import './bittynote/note.css';
 @import './bittymath/math.css';
+@import './bittyshop/shop.css';
 
 body {
   text-align: center;
@@ -119,6 +120,6 @@ main {
 
 #options{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 500px;
 }

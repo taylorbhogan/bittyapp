@@ -46,7 +46,7 @@ const generateMath = () => {
     if (numInput === '.' && !decimal) return;
 
     if (numInput === 'ENTER') {
-      if (state.currentInput.length > 0) return calculate();
+      if (state.currentInput.length) return calculate()
       return;
     }
 
@@ -56,7 +56,7 @@ const generateMath = () => {
     }
 
     state.currentInput += numInput
-    console.log(state);
+    // console.log(state);
     lcd.innerHTML = state.currentInput;
   }
 
@@ -64,11 +64,7 @@ const generateMath = () => {
   // switch statement for operation
   const calculate = () => {
     let currentValue = parseFloat(state.currentInput)
-    console.log(state.currentInput);
-    console.log(parseFloat(state.currentInput));
-    console.log(typeof currentValue);
-    console.log(typeof state.total);
-    console.log(state.currentOp);
+
     switch (state.currentOp) {
       case ('add'):
         state.total += currentValue;
@@ -90,15 +86,10 @@ const generateMath = () => {
   }
 
 
-  // handle operation input
-
-  // handle color change
-
   // if operation selected => calculate()
   // else set total to currentInout, reset currentInput, set operation
 
-
-  // FIND THE BUG AND GET ADD AND SUBTRACT WORKING
+  // handle operation input
   const handleOpInput = opInput => {
     options.childNodes.forEach(op => {
       if (op.innerHTML === opInput) {
@@ -108,17 +99,19 @@ const generateMath = () => {
       }
     })
 
+    console.log('state.currentInput', state.currentInput);
+    console.log('state.currentOp', state.currentOp);
+    console.log('opInput', opInput);
+    if (!state.currentInput.length) return state.currentOp = opInput
+
     if (state.currentOp) {
       calculate()
-      state.currentOp = opInput
-      return
     } else {
       state.total = parseFloat(state.currentInput)
       state.currentInput = ''
-      state.currentOp = opInput;
-      return
     }
-    console.log(state);
+    state.currentOp = opInput;
+    return
   }
 
   // draw numbers buttons
@@ -148,8 +141,31 @@ const generateMath = () => {
 
 
   const keyDown = e => {
-    console.log(e.keyCode);
     console.log(e.key);
+    switch (e.key) {
+      case ('.'):
+        return handleNumInput('.');
+      case ('c'):
+        return handleNumInput('c');
+      case ('Enter'):
+        console.log('problem starting now');
+        return handleNumInput('ENTER');
+      case ('+'):
+        handleOpInput('add');
+        break;
+      case ('-'):
+        handleOpInput('sub');
+        break;
+      case ('*'):
+        handleOpInput('mul');
+        break;
+      case ('/'):
+        handleOpInput('div');
+        break;
+      default:
+        if (e.key in nums) handleNumInput(e.key)
+    }
+
   }
   document.addEventListener('keydown', keyDown)
 }
