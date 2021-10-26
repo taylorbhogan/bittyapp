@@ -1,0 +1,28 @@
+#shop {
+  height: 500px;
+  width: 500px;
+  display: flex;
+}
+
+.shelf{
+  width: 33%;
+  height: 33%;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image{
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.name{
+  margin: .5rem 0;
+}
+
+.price{
+  font-size: .8rem;
+}
