@@ -2,10 +2,11 @@
   height: 500px;
   width: 500px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .shelf{
-  width: 33%;
+  width: calc(33% - 2rem);
   height: 40%;
   margin: 1rem;
   display: flex;

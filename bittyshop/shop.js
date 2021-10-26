@@ -32,12 +32,19 @@ let wares = {
     id: 3,
     name: 'three',
     price: 30
+  },
+  4: {
+    id: 4,
+    name: 'four',
+    price: 40
   }
 }
 
 let cart = {
   total: 0
 };
+
+let showCart = true;
 
 const generateShop = () => {
 
@@ -73,8 +80,7 @@ const generateShop = () => {
     cartButton.innerText = `$ ${cart.total}`
   }
 
-
-  Object.values(wares).forEach(ware => {
+  const shelfMaker = (ware, cartShelf) => {
     const shelf = document.createElement('div')
     shelf.classList.add('shelf')
 
@@ -96,17 +102,48 @@ const generateShop = () => {
     buyButton.innerText = 'add to cart'
     buyButton.onclick = e => buy(e)
 
-
     shelf.append(image)
     shelf.append(name)
     shelf.append(price)
+    if (cartShelf) {
+      const qty = document.createElement('p')
+      qty.innerText = ware.qty
+      shelf.append(qty)
+    }
     shelf.append(buyButton)
-    shop.append(shelf)
-  })
+    return shelf;
+  }
+
+  const renderShop = () => {
+    showCart = !showCart
+    while (shop.firstChild) {
+      shop.removeChild(shop.lastChild)
+    }
+    if (!showCart) {
+      Object.values(wares).forEach(ware => {
+        const shelf = shelfMaker(ware, false)
+        shop.append(shelf)
+      })
+    } else {
+      Object.values(cart).filter(ware => typeof ware === 'object').forEach(ware => {
+        const shelf = shelfMaker(ware, true)
+        shop.append(shelf)
+      })
+    }
+  }
+
+  renderShop()
 
   const cartButton = document.createElement('button');
   cartButton.innerText = `$ ${cart.total}`
-  cartButton.onclick = () => flipCart()
+  cartButton.onclick = () => renderShop()
   options.append(cartButton)
+}
 
+
+const item = {
+  "1": { "id": 1, "name": "one", "price": 10, "qty": 5 },
+  "2": { "id": 2, "name": "two", "price": 20, "qty": 8 },
+  "3": { "id": 3, "name": "three", "price": 30, "qty": 4 },
+  "4": { "id": 4, "name": "four", "price": 40, "qty": 1 }, "total": 370
 }
