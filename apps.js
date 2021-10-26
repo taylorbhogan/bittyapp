@@ -46,8 +46,8 @@ const apps = [
   {
     name: 'math',
     title: 'bitty math',
-    favicon: './images/app.svg',
-    color: '#FF66FF',
+    favicon: './images/math.svg',
+    color: '#90E45E',
     font: 'Megrim',
   },
   {
