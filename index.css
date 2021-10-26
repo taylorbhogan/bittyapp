@@ -11,7 +11,8 @@ body {
 
 .bittyFont,
 #options > * {
-  font-family: 'Press Start 2P';
+  /* font-family: 'Press Start 2P'; */
+  font-family: 'Geostar Fill';
 }
 
 
@@ -68,14 +69,8 @@ button:hover{
 
 /*      MAIN CONTENT     */
 
-#bitty{
-  font-family: 'Press Start 2P';
-  font-size: 2rem;
-}
-
 .main-text{
-  font-size: 4rem;
-  margin: 0;
+  font-size: 2rem;
 }
 
 .container{

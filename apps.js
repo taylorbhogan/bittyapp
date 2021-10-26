@@ -4,7 +4,9 @@ const apps = [
     title: 'bitty app',
     favicon: './images/app.svg',
     color: '#13e7dd',
-    font: 'Press Start 2P',
+    // font: 'Press Start 2P',
+    font: 'Geostar Fill',
+    // font: 'Share Tech Mono',
   },
   {
     name: 'blog',
