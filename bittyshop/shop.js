@@ -80,6 +80,18 @@ const generateShop = () => {
     cartButton.innerText = `$ ${cart.total}`
   }
 
+  const sell = e => {
+    const wareId = e.target.id;
+    --cart[wareId].qty;
+
+    if (cart[wareId] === 0) {
+      cart[wareId] = undefined
+    }
+    cart.total -= wares[wareId].price
+    localStorage.setItem('cart', JSON.stringify(cart))
+    cartButton.innerText = `$ ${cart.total}`
+  }
+
   const shelfMaker = (ware, cartShelf) => {
     const shelf = document.createElement('div')
     shelf.classList.add('shelf')
@@ -96,21 +108,51 @@ const generateShop = () => {
     price.classList.add('price')
     price.classList.add('bittyFont')
 
-    const buyButton = document.createElement('button')
-    buyButton.id = ware.id
-    buyButton.classList.add('buyButton')
-    buyButton.innerText = 'add to cart'
-    buyButton.onclick = e => buy(e)
+
 
     shelf.append(image)
     shelf.append(name)
     shelf.append(price)
+
     if (cartShelf) {
+      const qtyDiv = document.createElement('div')
+      qtyDiv.classList.add('qtyDiv')
+
+      const decrementButton = document.createElement('button')
+      decrementButton.id = ware.id
+      decrementButton.innerText = '-'
+      decrementButton.onclick = e => {
+        sell(e)
+        qty.innerText = ware.qty
+      }
+
       const qty = document.createElement('p')
       qty.innerText = ware.qty
-      shelf.append(qty)
+
+      const incrementButton = document.createElement('button')
+      incrementButton.id = ware.id
+      incrementButton.innerText = '+'
+      incrementButton.onclick = e => {
+        buy(e)
+        qty.innerText = ware.qty
+      }
+
+
+      qtyDiv.append(decrementButton)
+      qtyDiv.append(qty)
+      qtyDiv.append(incrementButton)
+
+
+      shelf.append(qtyDiv)
+    } else {
+      const buyButton = document.createElement('button')
+      buyButton.id = ware.id
+      buyButton.classList.add('buyButton')
+      buyButton.innerText = 'add to cart'
+      buyButton.onclick = e => buy(e)
+      shelf.append(buyButton)
     }
-    shelf.append(buyButton)
+
     return shelf;
   }
 
@@ -138,12 +180,4 @@ const generateShop = () => {
   cartButton.innerText = `$ ${cart.total}`
   cartButton.onclick = () => renderShop()
   options.append(cartButton)
-}
-
-
-const item = {
-  "1": { "id": 1, "name": "one", "price": 10, "qty": 5 },
-  "2": { "id": 2, "name": "two", "price": 20, "qty": 8 },
-  "3": { "id": 3, "name": "three", "price": 30, "qty": 4 },
-  "4": { "id": 4, "name": "four", "price": 40, "qty": 1 }, "total": 370
 }

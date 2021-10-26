@@ -32,3 +32,8 @@
   font-size: .8rem;
   margin: .3rem;
 }
+
+.qtyDiv{
+  display: flex;
+  flex-direction: row;
+}
