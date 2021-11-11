@@ -10,13 +10,6 @@ const apps = [
     // font: 'Share Tech Mono',
   },
   {
-    name: 'blog',
-    title: 'bitty blog',
-    favicon: './images/blog.svg',
-    color: '#009BFF',
-    font: 'Share Tech Mono',
-  },
-  {
     name: 'shop',
     title: 'bitty shop',
     favicon: './images/shop.svg',

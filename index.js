@@ -18,9 +18,6 @@ const setDisplay = () => {
     case ('app'):
       generateApp();
       break
-    case ('blog'):
-      generateBlog();
-      break
     case ('shop'):
       generateShop();
       break
