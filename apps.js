@@ -5,15 +5,9 @@ const apps = [
     favicon: './images/app.svg',
     color: '#13e7dd',
     // font: 'Press Start 2P',
-    font: 'Geostar Fill',
+    // font: 'Geostar Fill',
+    font: 'VT323',
     // font: 'Share Tech Mono',
-  },
-  {
-    name: 'blog',
-    title: 'bitty blog',
-    favicon: './images/blog.svg',
-    color: '#009BFF',
-    font: 'Share Tech Mono',
   },
   {
     name: 'shop',

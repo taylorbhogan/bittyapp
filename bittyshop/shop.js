@@ -2,7 +2,6 @@
 Features:
 - in options
   - cart button innerHTML = Cart: $0.00
-  - as you add to your cart, update innerHTML to reflect total value of the cart
   - clicking cart button => replace display wiht items in the cart
     - cart button => 'Back to Shop'
     - when clicked again, flips back to original text
@@ -44,7 +43,7 @@ let cart = {
   total: 0
 };
 
-let showCart = true;
+let showCart = false;
 
 const generateShop = () => {
 
@@ -156,8 +155,17 @@ const generateShop = () => {
     return shelf;
   }
 
-  const renderShop = () => {
+  const handleCartClick = () => {
     showCart = !showCart
+    renderShop()
+  }
+
+  const cartButton = document.createElement('button');
+  cartButton.onclick = () => handleCartClick()
+  options.append(cartButton)
+
+  const renderShop = () => {
+
     while (shop.firstChild) {
       shop.removeChild(shop.lastChild)
     }
@@ -166,18 +174,16 @@ const generateShop = () => {
         const shelf = shelfMaker(ware, false)
         shop.append(shelf)
       })
+      cartButton.innerText = `$ ${cart.total}`
     } else {
       Object.values(cart).filter(ware => typeof ware === 'object').forEach(ware => {
         const shelf = shelfMaker(ware, true)
         shop.append(shelf)
       })
+      cartButton.innerText = 'Back to Shop'
     }
   }
 
   renderShop()
 
-  const cartButton = document.createElement('button');
-  cartButton.innerText = `$ ${cart.total}`
-  cartButton.onclick = () => renderShop()
-  options.append(cartButton)
 }
