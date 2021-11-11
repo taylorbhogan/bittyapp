@@ -75,6 +75,7 @@ button:hover{
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin: 2rem;
   /* width: 20%; */
 }
 
@@ -114,10 +115,6 @@ main {
   color: #2ED9EB;
 }
 
-#display{
-  margin: 2rem;
-}
-
 #errors{
   color: red;
 }
@@ -126,4 +123,5 @@ main {
   display: flex;
   justify-content: space-around;
   width: 500px;
+  margin: 2rem;
 }
