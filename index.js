@@ -15,9 +15,6 @@ const setDisplay = () => {
   document.querySelector('link[rel="shortcut icon"]').href = selectedApp.favicon
 
   switch (selectedApp.name) {
-    case ('app'):
-      generateApp();
-      break
     case ('shop'):
       generateShop();
       break
