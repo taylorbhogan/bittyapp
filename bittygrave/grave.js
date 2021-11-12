@@ -9,7 +9,7 @@ const generateGrave = () => {
       site: 'https://iss-data.vercel.app/',
     },
     miniExpressBackend: {
-      name: 'Mini Express Backend',
+      name: 'mini express backend',
       site: 'https://recapp-express.herokuapp.com/api/questions',
     },
   }
