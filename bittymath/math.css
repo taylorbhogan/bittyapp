@@ -18,11 +18,11 @@
   margin-bottom: 1rem;
 }
 
-#numbers{
+#keypad{
   font-size: 1rem;
 }
 
-#numbers button{
+#keypad button{
 width: 33%;
 height: 25%;
 padding: 1rem;
