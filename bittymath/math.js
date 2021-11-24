@@ -10,32 +10,30 @@ const defaultState = {
 
 
 const generateMath = () => {
-  // declare state
-  // they would become the same object because we're just pointing.
+  // declare state - a reminder
   // its contents have updated, but the object itself is the same. you need to have a NEW object
   // we want to persist the defaultState and only work with a copy of it
   let state = { ...defaultState };
-
   let decimal = false;
+
 
   // draw calculator
   const math = document.createElement('div')
   math.id = 'math'
   math.style.border = `4px solid ${apps[0].color}`
 
+
   // draw "lcd display"
   const lcd = document.createElement('span')
   lcd.id = 'lcd'
   lcd.className = 'math-module'
   lcd.innerHTML = state.total;
-
   math.append(lcd)
 
-  // draw keypad display
 
+  // draw keypad display
   const numbers = document.createElement('div')
   numbers.id = 'numbers'
-
 
 
   // handle number inputs
@@ -60,8 +58,9 @@ const generateMath = () => {
     lcd.innerHTML = state.currentInput;
   }
 
+
   // handle calculations
-  // switch statement for operation
+  // // switch statement for operation
   const calculate = () => {
     let currentValue = parseFloat(state.currentInput)
 
@@ -99,9 +98,9 @@ const generateMath = () => {
       }
     })
 
-    console.log('state.currentInput', state.currentInput);
-    console.log('state.currentOp', state.currentOp);
-    console.log('opInput', opInput);
+    // console.log('state.currentInput', state.currentInput);
+    // console.log('state.currentOp', state.currentOp);
+    // console.log('opInput', opInput);
     if (!state.currentInput.length) return state.currentOp = opInput
 
     if (state.currentOp) {
@@ -135,7 +134,7 @@ const generateMath = () => {
     options.append(button)
   })
 
-  // append
+
   math.append(numbers)
   display.append(math)
 

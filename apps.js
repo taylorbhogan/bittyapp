@@ -9,13 +9,13 @@ const apps = [
     font: 'VT323',
     // font: 'Share Tech Mono',
   },
-  {
-    name: 'shop',
-    title: 'bitty shop',
-    favicon: './images/shop.svg',
-    color: '#bd6bdd',
-    font: 'Monoton',
-  },
+  // {
+  //   name: 'shop',
+  //   title: 'bitty shop',
+  //   favicon: './images/shop.svg',
+  //   color: '#bd6bdd',
+  //   font: 'Monoton',
+  // },
   {
     name: 'note',
     title: 'bitty note',

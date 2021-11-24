@@ -4,7 +4,8 @@
 
 body {
   text-align: center;
-  font-size: 24px;
+  /* font-size: 24px; */
+  font-size: 2rem;
   font-weight: 500;
   font-family:Arial, Helvetica, sans-serif;
 }
@@ -124,4 +125,8 @@ main {
   justify-content: space-around;
   width: 500px;
   margin: 2rem;
+}
+
+.bone{
+  margin: 2rem 0;
 }
