@@ -31,7 +31,7 @@ const makeArt = () => {
   const display = document.querySelector('#display')
   display.append(canvas)
   options.textContent = '© taylorbhogan'
-  options.classList.add('bittyFont')
+  // options.classList.add('bittyFont')
 
   // neat squared overlay
   // for (let x = -2; x < 255; x++) {
