@@ -24,7 +24,6 @@ aside button,
 button{
   background: none;
   border: none;
-  border: 1px solid white;
   border-radius: .3rem;
 }
 button:hover{
@@ -56,6 +55,10 @@ nav > ul {
   padding: 0;
   margin: 5vh 0;
   font-size: 1rem;
+}
+
+nav > ul > li > button {
+  color: inherit
 }
 
 /*      MAIN CONTENT     */
