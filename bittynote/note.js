@@ -1,15 +1,11 @@
 const generateNotes = () => {
-
-  const display = document.getElementById('display')
-  const options = document.getElementById('options')
-  const errorDisplay = document.getElementById('errors')
-
   const notebook = document.createElement('div')
   notebook.id = 'notebook'
   notebook.style.border = `4px solid ${apps[0].color}`
 
+  const errorDisplay = document.getElementById('errors')
+
   const editNote = (noteId, newNoteText) => {
-    //////  Delete old note & add new note  //////
     deleteNote(noteId)
     addNote(newNoteText)
   }
@@ -40,6 +36,7 @@ const generateNotes = () => {
       const submit = document.createElement('input')
       submit.classList.add('submitButton')
       submit.style.fontFamily = apps[0].font
+      submit.style.fontSize = '1rem'
       submit.type = 'submit'
       submit.innerText = 'save'
 
@@ -61,22 +58,10 @@ const generateNotes = () => {
   }
 
   const deleteNote = (noteId) => {
-    //////  delete from storage, then call renderNotes  //////
     const savedNotes = JSON.parse(localStorage.getItem('notes'))
-
-    let deletedNote = null;
-    for (let i = 0; i < savedNotes.length; i++) {
-      if (savedNotes[i].id === +noteId) {
-        deletedNote = savedNotes.splice(i, 1)
-        break
-      }
-    }
-    if (deletedNote) {
-      localStorage.setItem('notes', JSON.stringify(savedNotes))
-      renderNotes()
-    } else {
-      errorDisplay.textContent = 'An error occurred while deleting your note.'
-    }
+    delete savedNotes[noteId]
+    localStorage.setItem('notes', JSON.stringify(savedNotes))
+    renderNotes()
   }
 
   const formatNote = note => {
@@ -118,31 +103,14 @@ const generateNotes = () => {
       setEditForm(e.target.id)
     })
 
-    buttonDiv.appendChild(editButton)
-    buttonDiv.appendChild(deleteButton)
+    buttonDiv.append(editButton, deleteButton)
     adminContainer.append(buttonDiv)
 
-    formattedNote.appendChild(noteText)
-    formattedNote.appendChild(adminContainer)
+
+    formattedNote.append(noteText, adminContainer)
     return formattedNote;
   }
 
-  // handle initial render and the rerender when adding or deleting a note
-  const renderNotes = () => {
-    const savedInStorage = localStorage.getItem('notes')
-
-    if (savedInStorage) {
-      const savedNotes = JSON.parse(savedInStorage)
-
-      while (notebook.firstChild) {
-        notebook.removeChild(notebook.lastChild)
-      }
-      savedNotes.reverse().forEach(note => {
-        const formattedNote = formatNote(note)
-        notebook.append(formattedNote)
-      })
-    }
-  }
   const addNote = text => {
     //////  add note to storage, then call renderNotes  //////
     const note = {
@@ -151,11 +119,11 @@ const generateNotes = () => {
     }
 
     let savedNotes = JSON.parse(localStorage.getItem('notes'))
-    if (savedNotes){
-      savedNotes.push(note);
+    if (savedNotes) {
+      savedNotes[note.id] = note
     } else {
-      savedNotes = [];
-      savedNotes.push(note);
+      savedNotes = {};
+      savedNotes[note.id] = note;
     }
     localStorage.setItem('notes', JSON.stringify(savedNotes))
 
@@ -191,5 +159,21 @@ const generateNotes = () => {
   options.append(form)
 
   display.append(notebook)
+
+
+  const renderNotes = () => {
+    const savedInStorage = localStorage.getItem('notes')
+
+    if (savedInStorage) {
+      const savedNotesObj = JSON.parse(savedInStorage)
+
+      notebook.innerHTML = ''
+      const savedNotes = Object.values(savedNotesObj)
+      savedNotes.reverse().forEach(note => {
+        const formattedNote = formatNote(note)
+        notebook.append(formattedNote)
+      })
+    }
+  }
   renderNotes()
 }
