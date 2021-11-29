@@ -3,6 +3,7 @@
   width: 500px;
   display: flex;
   flex-wrap: wrap;
+  overflow: scroll;
 }
 
 .shelf{
@@ -21,6 +22,7 @@
 }
 
 .name{
+  font-size: 1rem;
   margin: .5rem 0;
 }
 
