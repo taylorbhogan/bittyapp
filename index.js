@@ -16,7 +16,10 @@ const setDisplay = () => {
 
   switch (selectedApp.name) {
     case ('app'):
-      generateApp();
+      const welcome = document.createElement('p')
+      welcome.textContent = 'welcome'
+      welcome.classList.add('welcome')
+      display.append(welcome)
       break
     case ('shop'):
       generateShop();
@@ -66,10 +69,10 @@ document.getElementById('right-button').onclick = rotateRight;
 document.getElementById('left-button').onclick = rotateLeft;
 
 const keyDown = (e) => {
-  switch(e.keyCode){
-    case(37):
+  switch (e.keyCode) {
+    case (37):
       return rotateLeft();
-    case(39):
+    case (39):
       return rotateRight();
     default:
       break;
