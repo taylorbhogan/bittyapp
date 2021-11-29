@@ -33,7 +33,7 @@ const setDisplay = () => {
     case ('note'):
       generateNotes();
       break
-    case ('MATH'):
+    case ('math'):
       generateMath();
       break
     case ('grave'):
@@ -56,14 +56,14 @@ const rotateLeft = () => {
   return apps;
 }
 
-// const navigate = (e) => {
-//   while (apps[0].name !== e.target.id){
-//     rotateRight()
-//   }
-// }
+const navigate = (e) => {
+  while (apps[0].name !== e.target.textContent){
+    rotateRight()
+  }
+}
 
-// const links = document.querySelectorAll('.nav-link')
-// links.forEach(link => link.addEventListener('click', navigate))
+const links = document.querySelectorAll('.nav-link')
+links.forEach(link => link.addEventListener('click', navigate))
 
 document.getElementById('right-button').onclick = rotateRight;
 document.getElementById('left-button').onclick = rotateLeft;
