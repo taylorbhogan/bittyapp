@@ -38,11 +38,12 @@ const apps = [
     font: 'Megrim',
   },
   {
-    name: 'MATH',
+    name: 'math',
     title: 'bitty math',
     favicon: './images/math.svg',
     color: '#90E45E',
-    font: 'Roboto',
+    // font: 'Roboto',
+    font: 'Alegreya Sans SC',
   },
   {
     name: 'grave',

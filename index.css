@@ -24,7 +24,6 @@ aside button,
 button{
   background: none;
   border: none;
-  border: 1px solid white;
   border-radius: .3rem;
 }
 button:hover{
@@ -48,26 +47,19 @@ button:hover{
 }
 
 /*      NAVIGATION     */
-/*
-.nav-link-list a {
-  color: inherit;
-}
 
-.nav-link-list {
+nav > ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding: 0;
-  margin-top: 10vh;
+  margin: 5vh 0;
+  font-size: 1rem;
 }
 
-.nav-link-list > li {
-  list-style-type: none;
+nav > ul > li > button {
+  color: inherit
 }
-.nav-link {
-  text-decoration: none;
-} */
-
 
 /*      MAIN CONTENT     */
 
@@ -85,7 +77,7 @@ button:hover{
 }
 
 #container{
-  height: 100vh;
+  height: calc(100vh - 11rem);
   display: flex;
   flex-direction: row;
   justify-content: center;
