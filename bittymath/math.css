@@ -5,6 +5,7 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   margin-bottom: 2rem;
 }
 
@@ -15,7 +16,7 @@
   overflow: scroll;
   border: 1px solid #eaeaea;
   border-radius: .25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 #keypad{

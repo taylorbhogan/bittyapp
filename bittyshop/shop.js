@@ -19,24 +19,49 @@ Stack:
 let wares = {
   1: {
     id: 1,
-    name: 'one',
+    name: 'thingamajig',
     price: 10
   },
   2: {
     id: 2,
-    name: 'two',
+    name: 'doodad',
     price: 20
   },
   3: {
     id: 3,
-    name: 'three',
+    name: 'gadget',
     price: 30
   },
   4: {
     id: 4,
-    name: 'four',
+    name: 'widget',
     price: 40
-  }
+  },
+  5: {
+    id: 5,
+    name: 'doohickey',
+    price: 50
+  },
+  6: {
+    id: 6,
+    name: 'thingy',
+    price: 60
+  },
+  7: {
+    id: 7,
+    name: 'gizmo',
+    price: 70
+  },
+  8: {
+    id: 8,
+    name: 'contraption',
+    price: 80
+  },
+  9: {
+    id: 9,
+    name: 'whatchamacallit',
+    price: 90
+  },
 }
 
 let cart = {
