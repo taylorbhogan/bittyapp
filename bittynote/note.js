@@ -1,21 +1,123 @@
 const generateNotes = () => {
-
-  const display = document.getElementById('display')
-  const options = document.getElementById('options')
-  const errorDisplay = document.getElementById('errors')
-
   const notebook = document.createElement('div')
   notebook.id = 'notebook'
   notebook.style.border = `4px solid ${apps[0].color}`
+  display.append(notebook)
+
+  const savedNotes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : {
+    43770: {
+      "id": 43770,
+      "text": "welcome to bitty note! nothing lasts forever, but your notes will stick around here unless you erase your notes or clear your browser’s local storage. all of your notes are stored locally and not accessible by anyone else."
+    }
+  }
+
+  const formatNote = note => {
+    const formattedNote = document.createElement('div')
+    formattedNote.id = note.id
+    formattedNote.classList.add('note')
+
+    const noteText = document.createElement('p')
+    noteText.textContent = note.text
+
+    const adminContainer = document.createElement('div')
+    adminContainer.classList.add('noteAdmin')
+
+    const timestamp = document.createElement('p')
+    const theDate = new Date(note.id).toLocaleDateString()
+    const theTime = new Date(note.id).toLocaleTimeString()
+    timestamp.textContent = `${theTime} on ${theDate}`
+    adminContainer.appendChild(timestamp)
+
+    const buttonDiv = document.createElement('div')
+    const deleteButton = document.createElement('button')
+    deleteButton.id = note.id
+    deleteButton.textContent = 'erase'
+    deleteButton.addEventListener('click', e => {
+      deleteNote(e.target.id);
+    })
+
+    const editButton = document.createElement('button')
+    editButton.id = note.id
+    editButton.textContent = 'edit'
+    editButton.addEventListener('click', e => {
+      setEditForm(e.target.id)
+    })
+
+    buttonDiv.append(editButton, deleteButton)
+    adminContainer.append(buttonDiv)
+
+    formattedNote.append(noteText, adminContainer)
+    return formattedNote;
+  }
+
+  //////  renderNotes() - called on initial render, note add/edit/delete   //////
+  const renderNotes = () => {
+    notebook.innerHTML = ''
+    Object.values(savedNotes).reverse().forEach(note => {
+      const formattedNote = formatNote(note)
+      notebook.append(formattedNote)
+    })
+  }
+  renderNotes()
+
+
+  const errorDisplay = document.getElementById('errors')
+
+  //////  create form  //////
+  const newNoteForm = document.createElement('form')
+  newNoteForm.id = 'noteForm';
+
+  const input = document.createElement('input')
+  input.type = 'text'
+  input.classList.add('noteInput')
+  input.placeholder = 'Enter your note...'
+
+  const button = document.createElement('button')
+  button.classList.add('submitButton')
+  button.type = 'submit'
+  button.textContent = 'Jot'
+  button.style.fontFamily = apps[0].font
+  button.style.color = apps[0].color
+
+  newNoteForm.addEventListener('submit', e => {
+    e.preventDefault()
+
+    const text = input.value.trim();      // always a good idea to trim off any whitespace
+    addNote(text)
+
+    input.value = ''
+  })
+
+  newNoteForm.append(input, button)
+  options.append(newNoteForm)
+
+
+  //////  note interaction functions  //////
+  const addNote = text => {
+    const note = {
+      id: Date.now(),
+      text,
+    }
+
+    savedNotes[note.id] = note
+    localStorage.setItem('notes', JSON.stringify(savedNotes))
+
+    renderNotes()
+  }
+
+  const deleteNote = (noteId) => {
+    delete savedNotes[noteId]
+    localStorage.setItem('notes', JSON.stringify(savedNotes))
+    renderNotes()
+  }
 
   const editNote = (noteId, newNoteText) => {
-    //////  Delete old note & add new note  //////
     deleteNote(noteId)
     addNote(newNoteText)
   }
 
   const setEditForm = (noteId) => {
-    //////  Find note to edit in DOM & replace w/ form  //////
+    //////  find note to edit in DOM & replace w/ form  //////
     const formattedNotes = document.querySelectorAll('.note')
     let divToReplace = null;
     for (let i = 0; i < formattedNotes.length; i++) {
@@ -40,6 +142,7 @@ const generateNotes = () => {
       const submit = document.createElement('input')
       submit.classList.add('submitButton')
       submit.style.fontFamily = apps[0].font
+      submit.style.fontSize = '1rem'
       submit.type = 'submit'
       submit.innerText = 'save'
 
@@ -59,137 +162,4 @@ const generateNotes = () => {
       errorDisplay.textContent = 'An error occurred while editing your note.'
     }
   }
-
-  const deleteNote = (noteId) => {
-    //////  delete from storage, then call renderNotes  //////
-    const savedNotes = JSON.parse(localStorage.getItem('notes'))
-
-    let deletedNote = null;
-    for (let i = 0; i < savedNotes.length; i++) {
-      if (savedNotes[i].id === +noteId) {
-        deletedNote = savedNotes.splice(i, 1)
-        break
-      }
-    }
-    if (deletedNote) {
-      localStorage.setItem('notes', JSON.stringify(savedNotes))
-      renderNotes()
-    } else {
-      errorDisplay.textContent = 'An error occurred while deleting your note.'
-    }
-  }
-
-  const formatNote = note => {
-    //////  Create Note Div  //////
-    const formattedNote = document.createElement('div')
-    formattedNote.id = note.id
-    formattedNote.classList.add('note')
-
-
-    //////  Create Note Text  //////
-    const noteText = document.createElement('p')
-    noteText.classList.add('noteText')
-    noteText.textContent = note.text
-
-
-    //////  Create Bottom Row  //////
-    const adminContainer = document.createElement('div')
-    adminContainer.classList.add('noteAdmin')
-
-    const timestamp = document.createElement('p')
-    const theDate = new Date(note.id).toLocaleDateString()
-    const theTime = new Date(note.id).toLocaleTimeString()
-    timestamp.textContent = `${theTime} on ${theDate}`
-    adminContainer.appendChild(timestamp)
-
-    //////  Create Buttons  //////
-    const buttonDiv = document.createElement('div')
-    const deleteButton = document.createElement('button')
-    deleteButton.id = note.id
-    deleteButton.textContent = 'erase'
-    deleteButton.addEventListener('click', e => {
-      deleteNote(e.target.id);
-    })
-
-    const editButton = document.createElement('button')
-    editButton.id = note.id
-    editButton.textContent = 'edit'
-    editButton.addEventListener('click', e => {
-      setEditForm(e.target.id)
-    })
-
-    buttonDiv.appendChild(editButton)
-    buttonDiv.appendChild(deleteButton)
-    adminContainer.append(buttonDiv)
-
-    formattedNote.appendChild(noteText)
-    formattedNote.appendChild(adminContainer)
-    return formattedNote;
-  }
-
-  // handle initial render and the rerender when adding or deleting a note
-  const renderNotes = () => {
-    const savedInStorage = localStorage.getItem('notes')
-
-    if (savedInStorage) {
-      const savedNotes = JSON.parse(savedInStorage)
-
-      while (notebook.firstChild) {
-        notebook.removeChild(notebook.lastChild)
-      }
-      savedNotes.reverse().forEach(note => {
-        const formattedNote = formatNote(note)
-        notebook.append(formattedNote)
-      })
-    }
-  }
-  const addNote = text => {
-    //////  add note to storage, then call renderNotes  //////
-    const note = {
-      id: Date.now(),
-      text,
-    }
-
-    let savedNotes = JSON.parse(localStorage.getItem('notes'))
-    if (savedNotes){
-      savedNotes.push(note);
-    } else {
-      savedNotes = [];
-      savedNotes.push(note);
-    }
-    localStorage.setItem('notes', JSON.stringify(savedNotes))
-
-    renderNotes()
-  }
-
-  //////  Create Form  //////
-  const form = document.createElement('form')
-  form.id = 'noteForm';
-
-  const input = document.createElement('input')
-  input.type = 'text'
-  input.classList.add('noteInput')
-  input.placeholder = 'Enter your note...'
-
-  const button = document.createElement('button')
-  button.classList.add('submitButton')
-  button.type = 'submit'
-  button.textContent = 'Jot'
-  button.style.fontFamily = apps[0].font
-  button.style.color = apps[0].color
-
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-
-    const text = input.value.trim();      // always a good idea to trim off any whitespace
-    addNote(text)
-
-    input.value = ''
-  })
-
-  form.append(input, button)
-  options.append(form)
-
-  display.append(notebook)
-  renderNotes()
 }
