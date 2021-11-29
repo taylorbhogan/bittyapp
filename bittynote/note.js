@@ -4,20 +4,21 @@ const generateNotes = () => {
   notebook.style.border = `4px solid ${apps[0].color}`
   display.append(notebook)
 
+  const savedNotes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : {
+    43770: {
+      "id": 43770,
+      "text": "welcome to bitty note! nothing lasts forever, but your notes will stick around here unless you erase your notes or clear your browser’s local storage. all of your notes are stored locally and not accessible by anyone else."
+    }
+  }
 
-  //////  Note Formatter for use in renderNotes()  //////
   const formatNote = note => {
-    ////  Create Note Div
     const formattedNote = document.createElement('div')
     formattedNote.id = note.id
     formattedNote.classList.add('note')
 
-    ////  Create Note Text
     const noteText = document.createElement('p')
-    noteText.classList.add('noteText')
     noteText.textContent = note.text
 
-    ////  Create Bottom Row
     const adminContainer = document.createElement('div')
     adminContainer.classList.add('noteAdmin')
 
@@ -27,7 +28,6 @@ const generateNotes = () => {
     timestamp.textContent = `${theTime} on ${theDate}`
     adminContainer.appendChild(timestamp)
 
-    ////  Create Buttons
     const buttonDiv = document.createElement('div')
     const deleteButton = document.createElement('button')
     deleteButton.id = note.id
@@ -50,26 +50,20 @@ const generateNotes = () => {
     return formattedNote;
   }
 
+  //////  renderNotes() - called on initial render, note add/edit/delete   //////
   const renderNotes = () => {
-    const savedInStorage = localStorage.getItem('notes')
-
-    if (savedInStorage) {
-      const savedNotesObj = JSON.parse(savedInStorage)
-
-      notebook.innerHTML = ''
-      const savedNotes = Object.values(savedNotesObj)
-      savedNotes.reverse().forEach(note => {
-        const formattedNote = formatNote(note)
-        notebook.append(formattedNote)
-      })
-    }
+    notebook.innerHTML = ''
+    Object.values(savedNotes).reverse().forEach(note => {
+      const formattedNote = formatNote(note)
+      notebook.append(formattedNote)
+    })
   }
   renderNotes()
 
 
   const errorDisplay = document.getElementById('errors')
 
-  //////  Create Form  //////
+  //////  create form  //////
   const newNoteForm = document.createElement('form')
   newNoteForm.id = 'noteForm';
 
@@ -98,27 +92,20 @@ const generateNotes = () => {
   options.append(newNoteForm)
 
 
-  //////  Note Interaction Functions  //////
+  //////  note interaction functions  //////
   const addNote = text => {
     const note = {
       id: Date.now(),
       text,
     }
 
-    let savedNotes = JSON.parse(localStorage.getItem('notes'))
-    if (savedNotes) {
-      savedNotes[note.id] = note
-    } else {
-      savedNotes = {};
-      savedNotes[note.id] = note;
-    }
+    savedNotes[note.id] = note
     localStorage.setItem('notes', JSON.stringify(savedNotes))
 
     renderNotes()
   }
 
   const deleteNote = (noteId) => {
-    const savedNotes = JSON.parse(localStorage.getItem('notes'))
     delete savedNotes[noteId]
     localStorage.setItem('notes', JSON.stringify(savedNotes))
     renderNotes()
@@ -130,7 +117,7 @@ const generateNotes = () => {
   }
 
   const setEditForm = (noteId) => {
-    //////  Find note to edit in DOM & replace w/ form  //////
+    //////  find note to edit in DOM & replace w/ form  //////
     const formattedNotes = document.querySelectorAll('.note')
     let divToReplace = null;
     for (let i = 0; i < formattedNotes.length; i++) {
