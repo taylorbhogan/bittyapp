@@ -1,8 +1,8 @@
 // const generateMath = () => {
   // declare initial state
-  let operation = 'add';
-  let total = 0;
-  let num = 0;
+  // let operation = 'add';
+  // let total = 0;
+  // let num = 0;
 
   //// grab display and options
   // fill display:

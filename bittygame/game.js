@@ -12,28 +12,17 @@ const generateGame = () => {
   display.append(canvas)
   ctx = canvas.getContext('2d');
 
-  const easyButton = document.createElement('button')
-  easyButton.textContent = 'easy'
-  easyButton.id = 'easyButton'
-  const normalButton = document.createElement('button')
-  normalButton.textContent = 'normal'
-  normalButton.id = 'normalButton'
-  normalButton.classList.add('activeButton')
-  const hardButton = document.createElement('button')
-  hardButton.textContent = 'hard'
-  hardButton.id = 'hardButton'
-  const arcadeButton = document.createElement('button')
-  arcadeButton.textContent = 'arcade'
-  arcadeButton.id = 'arcadeButton'
+  level = 'normal'
+  arcadeOn = false;
 
-
-  const difficultyButtons = [easyButton, normalButton, hardButton, arcadeButton]
-  difficultyButtons.forEach(button => {
-    button.classList.add('difficultyButton')
+  const levels = ['easy', 'normal', 'hard', 'arcade']
+  levels.forEach(level => {
+    const button = document.createElement('button')
+    button.innerHTML = level
+    if (level === 'normal') button.style.color = apps[0].color
+    button.addEventListener('click', e => setDifficulty(e))
+    options.append(button)
   })
-
-  options.append(easyButton, normalButton, hardButton, arcadeButton)
-
 
   ///// Initial game state
   posX = posY = 10;      // head positionX, Y - later used to reference each segment
@@ -133,57 +122,42 @@ const generateGame = () => {
     if (document.querySelector('.activeButton')) {
       if (document.querySelector('.activeButton').id === 'arcadeButton') ctx.fillText(`Level: ${score / 10}`, 200, 25)
     }
+    if (arcadeOn) {
+      ctx.fillText(`Level: ${score / 10}`, 200, 25)
+    }
   }
 
   ///// Defaulting to 'normal', use inputted difficulty value to determine gameplay cadence, then start game
   let speedInterval;
 
   const setGameSpeed = () => {
-    let speedButton = document.querySelector('.activeButton')
-
     clearInterval(speedInterval)
 
-    switch (speedButton.id) {
-      case ('easyButton'):
+    switch (level) {
+      case ('easy'):
         speedInterval = setInterval(game, 1000 / 8);
         break
-      case ('normalButton'):
+      case ('normal'):
         speedInterval = setInterval(game, 1000 / 15);
         break
-      case ('hardButton'):
+      case ('hard'):
         speedInterval = setInterval(game, 1000 / 30);
         break
-      case ('arcadeButton'):
-        speedInterval = setInterval(game, 1000 / (15 + score))
+      case ('arcade'):
+        speedInterval = setInterval(game, 1000 / (15 + score));
         break
     }
   }
 
   ///// Set activeButton class on the selected button to be used by setGameSpeed
   const setDifficulty = (e) => {
-    // reset the active button
-    document.querySelector('.activeButton').classList.remove('activeButton')
-
-    // add the active class to the pushed button
-    switch (e.target.id) {
-      case ('easyButton'):
-        document.querySelector('#easyButton').classList.add('activeButton')
-        break
-      case ('normalButton'):
-        document.querySelector('#normalButton').classList.add('activeButton')
-        break
-      case ('hardButton'):
-        document.querySelector('#hardButton').classList.add('activeButton')
-        break
-      case ('arcadeButton'):
-        document.querySelector('#arcadeButton').classList.add('activeButton')
-        break
-    }
+    level = e.target.innerHTML
+    if (level === 'arcade') arcadeOn = true;
+    options.childNodes.forEach(button => {
+      button.style.color = button.innerHTML === e.target.innerHTML ? apps[0].color : '#000000'
+    })
     setGameSpeed()
   }
-
-  const buttons = document.querySelectorAll('.difficultyButton')
-  buttons.forEach(button => button.addEventListener('click', (e) => setDifficulty(e)))
 
   setGameSpeed()
 }

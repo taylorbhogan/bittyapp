@@ -23,7 +23,7 @@ const generateMath = () => {
   math.style.border = `4px solid ${apps[0].color}`
 
 
-  // draw "lcd display"
+  // draw lcd display
   const lcd = document.createElement('span')
   lcd.id = 'lcd'
   lcd.className = 'math-module'
@@ -32,17 +32,11 @@ const generateMath = () => {
 
 
   // draw keypad display
-  const numbers = document.createElement('div')
-  numbers.id = 'numbers'
+  const keypad = document.createElement('div')
+  keypad.id = 'keypad'
 
 
-  // handle number inputs
   const handleNumInput = numInput => {
-    if (numInput === '.' && decimal) return;
-
-    // TODO: implement decimal input
-    if (numInput === '.' && !decimal) return;
-
     if (numInput === 'ENTER') {
       if (state.currentInput.length) return calculate()
       return;
@@ -50,17 +44,23 @@ const generateMath = () => {
 
     if (numInput === 'c') {
       state = { ...defaultState }
+      decimal = false;
       return lcd.innerHTML = 0
     }
 
+    if (numInput === '.' && decimal) return;
+
+    if (numInput === '.' && !decimal) {
+      if (state.currentInput.length === 0) state.currentInput += '0'
+      decimal = true;
+    }
+
     state.currentInput += numInput
-    // console.log(state);
     lcd.innerHTML = state.currentInput;
+    return
   }
 
 
-  // handle calculations
-  // // switch statement for operation
   const calculate = () => {
     let currentValue = parseFloat(state.currentInput)
 
@@ -80,15 +80,13 @@ const generateMath = () => {
       default:
         break
     }
-    state.currentInput = ''
+    state.currentInput = '';
     lcd.innerHTML = state.total;
+    decimal = false;
   }
 
 
-  // if operation selected => calculate()
-  // else set total to currentInout, reset currentInput, set operation
 
-  // handle operation input
   const handleOpInput = opInput => {
     options.childNodes.forEach(op => {
       if (op.innerHTML === opInput) {
@@ -98,9 +96,7 @@ const generateMath = () => {
       }
     })
 
-    // console.log('state.currentInput', state.currentInput);
-    // console.log('state.currentOp', state.currentOp);
-    // console.log('opInput', opInput);
+    decimal = false;
     if (!state.currentInput.length) return state.currentOp = opInput
 
     if (state.currentOp) {
@@ -113,7 +109,7 @@ const generateMath = () => {
     return
   }
 
-  // draw numbers buttons
+  // draw keypad buttons
   nums.forEach(num => {
     const button = document.createElement('button')
     button.classList.add('bittyFont')
@@ -121,8 +117,7 @@ const generateMath = () => {
     if (num === 'c') button.style.color = apps[0].color
     if (num === 'ENTER') button.style.fontFamily = apps[0].font
     button.onclick = () => handleNumInput(num)
-    numbers.append(button)
-
+    keypad.append(button)
   })
 
 
@@ -135,19 +130,17 @@ const generateMath = () => {
   })
 
 
-  math.append(numbers)
+  math.append(keypad)
   display.append(math)
 
 
   const keyDown = e => {
-    console.log(e.key);
     switch (e.key) {
       case ('.'):
         return handleNumInput('.');
       case ('c'):
         return handleNumInput('c');
       case ('Enter'):
-        console.log('problem starting now');
         return handleNumInput('ENTER');
       case ('+'):
         handleOpInput('add');
@@ -163,6 +156,7 @@ const generateMath = () => {
         break;
       default:
         if (e.key in nums) handleNumInput(e.key)
+        break
     }
 
   }

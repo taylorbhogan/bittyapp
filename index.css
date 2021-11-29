@@ -4,15 +4,16 @@
 
 body {
   text-align: center;
-  /* font-size: 24px; */
   font-size: 2rem;
   font-weight: 500;
   font-family:Arial, Helvetica, sans-serif;
 }
 
 .bittyFont,
-#options > * {
-  /* font-family: 'Press Start 2P'; */
+#options,
+#options > *,
+aside button,
+#app-header {
   font-family: 'VT323';
 }
 
@@ -70,21 +71,20 @@ button:hover{
 
 /*      MAIN CONTENT     */
 
-.app-header{
+#app-header{
   font-size: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin: 2rem;
-  /* width: 20%; */
 }
 
 #app-name{
   margin-left: 1rem;
 }
 
-.container{
+#container{
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -92,16 +92,20 @@ button:hover{
   align-items: center;
 }
 
+@media all and (max-width: 700px) {
+ #container{
+   flex-direction: column;
+ }
+}
+
 main {
-  width: 50vw;
-  height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.carousel-button{
+aside button{
   padding: 0 .5rem;
   height: 2rem;
   width: 2rem;
