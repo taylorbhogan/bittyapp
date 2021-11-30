@@ -16,11 +16,11 @@
   overflow: scroll;
   border: 1px solid #eaeaea;
   border-radius: .25rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 #keypad{
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 #keypad button{

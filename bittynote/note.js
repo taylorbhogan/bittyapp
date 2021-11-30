@@ -73,7 +73,6 @@ const generateNotes = () => {
   input.placeholder = 'Enter your note...'
 
   const button = document.createElement('button')
-  button.classList.add('submitButton')
   button.type = 'submit'
   button.textContent = 'Jot'
   button.style.fontFamily = apps[0].font
@@ -140,7 +139,6 @@ const generateNotes = () => {
       input.type = 'text'
       input.value = oldNote;
       const submit = document.createElement('input')
-      submit.classList.add('submitButton')
       submit.style.fontFamily = apps[0].font
       submit.style.fontSize = '1rem'
       submit.type = 'submit'

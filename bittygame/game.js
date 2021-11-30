@@ -114,16 +114,17 @@ const generateGame = () => {
     ctx.fillStyle = '#FF0000'                           // apple color
     ctx.fillRect(aplX * gridScale, aplY * gridScale, gridScale - 2, gridScale - 2)
 
-    ctx.font = '20px Typewriter'
+    ctx.font = '20px VT323'
     ctx.fillStyle = 'white'
-    ctx.fillText(`Score: ${score}`, 10, 25)
-    ctx.fillText(`High Score: ${highScore}`, 360, 25)
+    // ctx.fillText(`Score: ${score}`, 10, 25)
+    ctx.fillText(`Score: ${score}`, 410, 45)
+    ctx.fillText(`High Score: ${highScore}`, 370, 25)
 
     if (document.querySelector('.activeButton')) {
       if (document.querySelector('.activeButton').id === 'arcadeButton') ctx.fillText(`Level: ${score / 10}`, 200, 25)
     }
     if (arcadeOn) {
-      ctx.fillText(`Level: ${score / 10}`, 200, 25)
+      ctx.fillText(`Level: ${score / 10}`, 410, 65)
     }
   }
 

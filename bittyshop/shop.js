@@ -199,7 +199,7 @@ const generateShop = () => {
         const shelf = shelfMaker(ware, false)
         shop.append(shelf)
       })
-      cartButton.innerText = `$ ${cart.total}`
+      cartButton.innerHTML = `Cart: $ ${cart.total}`
     } else {
       Object.values(cart).filter(ware => typeof ware === 'object').forEach(ware => {
         const shelf = shelfMaker(ware, true)
