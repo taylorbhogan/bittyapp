@@ -35,10 +35,6 @@ input[type=submit]:hover{
   transition: all 300ms;
 }
 
-.submitButton{
-  padding: 0 1rem;
-}
-
 /*      NAVIGATION     */
 nav > ul {
   display: flex;
@@ -94,7 +90,6 @@ aside button{
   height: 2rem;
   width: 2rem;
   color: inherit;
-
 }
 .welcome{
   font-size: 12px;

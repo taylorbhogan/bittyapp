@@ -55,3 +55,8 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+form button,
+form input[type=submit]{
+  padding: 0 1rem;
+}
