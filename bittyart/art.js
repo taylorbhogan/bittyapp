@@ -25,6 +25,7 @@ const makeArt = () => {
 
         context.fillRect(x/((x ^ y) % 13), y / ((x ^ y) % 13), 4, 4)
         context.fillStyle = `rgb(1, ${x}, ${y})`
+        // context.fillText('x/((x ^ y) % 13), y / ((x ^ y) % 13',400,400)
       }
     }
   }

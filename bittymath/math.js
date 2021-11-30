@@ -26,7 +26,6 @@ const generateMath = () => {
   // draw lcd display
   const lcd = document.createElement('span')
   lcd.id = 'lcd'
-  lcd.className = 'math-module'
   lcd.innerHTML = state.total;
   math.append(lcd)
 
@@ -88,6 +87,7 @@ const generateMath = () => {
 
 
   const handleOpInput = opInput => {
+    console.log('handleopInput',opInput);
     options.childNodes.forEach(op => {
       if (op.innerHTML === opInput) {
         op.style.color = apps[0].color
@@ -97,10 +97,13 @@ const generateMath = () => {
     })
 
     decimal = false;
+    console.log(state);
     if (!state.currentInput.length) return state.currentOp = opInput
+    console.log(state);
 
     if (state.currentOp) {
       calculate()
+      state.currentOp = opInput
     } else {
       state.total = parseFloat(state.currentInput)
       state.currentInput = ''
@@ -135,6 +138,7 @@ const generateMath = () => {
 
 
   const keyDown = e => {
+    console.log(e.key);
     switch (e.key) {
       case ('.'):
         return handleNumInput('.');
