@@ -13,6 +13,7 @@ body {
 #options,
 #options > *,
 aside button,
+nav > ul > li > button,
 #app-header {
   font-family: 'VT323';
 }
@@ -20,34 +21,25 @@ aside button,
 
 
 /*      BUTTONS     */
-
-button{
+button,
+input[type=submit]{
   background: none;
-  border: none;
+  border: 1px solid transparent;
+  border-width: 1px;
   border-radius: .3rem;
 }
-button:hover{
-  box-shadow: 1px 2px red;
-  border: 1px solid blue;
-  transition: box-shadow 500ms;
-  transition: border 50ms;
+
+button:hover,
+input[type=submit]:hover{
+  border: 1px solid #eaeaea;
+  transition: all 300ms;
 }
 
 .submitButton{
   padding: 0 1rem;
-  margin: 0;
-  border: 0;
-  border: 1px solid white;
-  background: none;
-}
-
-.submitButton:hover{
-  border: 1px solid #dadada;
-  transition: all 500ms;
 }
 
 /*      NAVIGATION     */
-
 nav > ul {
   display: flex;
   flex-direction: row;
@@ -58,11 +50,11 @@ nav > ul {
 }
 
 nav > ul > li > button {
-  color: inherit
+  color: inherit;
+  font-size: 1.5rem;
 }
 
-/*      MAIN CONTENT     */
-
+/*      CONTENT     */
 #app-header{
   font-size: 2rem;
   display: flex;
